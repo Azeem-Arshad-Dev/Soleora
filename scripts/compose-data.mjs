@@ -20,6 +20,7 @@ const ROWS = [
   ['ballet-flats', 'womens', false, [['Bow at the vamp', 'bow'], ['Low-cut topline', 'collar'], ['Flexible flat sole', 'sole']]],
   ['ankle-boots', 'womens', false, [['Block heel', 'heelBlock'], ['Side zip', 'zip'], ['Ankle-height shaft', 'shaft']]],
 ];
+const NAMES = {"running-shoes": "Running shoes", "basketball-shoes": "Basketball shoes", "football-boots": "Football boots", "hiking-shoes-boots": "Hiking shoes", "sneakers": "Sneakers", "loafers": "Loafers", "slip-ons-espadrilles": "Espadrilles", "sandals": "Sandals", "oxford-shoes": "Oxfords", "derby-shoes": "Derbies", "brogues": "Brogues", "monk-straps": "Monk straps", "chelsea-boots": "Chelsea boots", "chukka-boots": "Chukka boots", "work-boots": "Work boots", "heels": "Heels", "ballet-flats": "Ballet flats", "ankle-boots": "Ankle boots"};
 const TINTS = { athletic: '#B7CCC3', casual: '#CBC2DE', formal: '#C6B8AD', boots: '#CFB894', womens: '#BFC9D8' };
 const VIEWS = { 'ankle-boots': { yaw: 35, pitch: 10 }, 'monk-straps': { yaw: -40, pitch: 14 }, 'loafers': { yaw: -30, pitch: 18 } };
 const start = new Date('2026-11-02T00:00:00Z');
@@ -28,7 +29,7 @@ const out = ROWS.map(([slug, category, featured, hs], i) => {
   const words = fs.readFileSync(`content/articles/${slug}.md`, 'utf8').split(/\s+/).filter(Boolean).length;
   const d = new Date(start.getTime() + i * 86400000);
   return {
-    slug, title: meta.title, standfirst: meta.standfirst, category, excerpt: meta.excerpt,
+    slug, n: i + 1, name: NAMES[slug], title: meta.title, standfirst: meta.standfirst, category, excerpt: meta.excerpt,
     author: 'Soleora Editorial', date: d.toISOString().slice(0, 10), readTime: Math.max(3, Math.round(words / 220)),
     tags: meta.tags, featured, formality: meta.formality, stageTint: TINTS[category],
     view: { yaw: -35, pitch: 12, ...(VIEWS[slug] || {}) },

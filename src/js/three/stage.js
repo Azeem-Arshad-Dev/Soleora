@@ -42,7 +42,7 @@ function cycloramaMaterial() {
 
 export function themeStageColor(hex) {
   const dark = document.documentElement.dataset.theme === 'dark';
-  return dark ? new THREE.Color(hex).lerp(new THREE.Color(DARK_STAGE), 0.8) : new THREE.Color(hex);
+  return dark ? new THREE.Color(hex).lerp(new THREE.Color(DARK_STAGE), 0.86) : new THREE.Color(hex);
 }
 
 /**
@@ -55,7 +55,7 @@ export function createStage(el, { tier = 'full' } = {}) {
   renderer.toneMapping = THREE.AgXToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.domElement.setAttribute('aria-hidden', 'true');
   renderer.domElement.className = 'stage-canvas';
   el.appendChild(renderer.domElement);
@@ -69,7 +69,7 @@ export function createStage(el, { tier = 'full' } = {}) {
   camera.position.set(0, 0.6, 4);
 
   const key = new THREE.DirectionalLight('#fff6ec', 2.2);
-  key.position.set(-2.2, 3.1, 2.2);
+  key.position.set(-1.2, 4, 1.6);
   key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048);
   key.shadow.radius = 6;
@@ -132,6 +132,8 @@ export function createStage(el, { tier = 'full' } = {}) {
     setTint(hex) { applyTint(themeStageColor(hex)); dirty = true; },
     setTintColor(c) { applyTint(c); dirty = true; },
     requestRender() { dirty = true; },
+    /** Keeps the key light and its shadow frustum centred on world x. */
+    followLight(x) { key.position.set(x - 1.2, 4, 1.6); key.target.position.set(x, 0, 0); key.target.updateMatrixWorld(); },
     onFrame(cb) { frameCbs.add(cb); return () => frameCbs.delete(cb); },
     resize() {
       const r = el.getBoundingClientRect();

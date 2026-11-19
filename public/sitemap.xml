@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc></url>
+  <url><loc>https://example.com/articles.html</loc></url>
+  <url><loc>https://example.com/about.html</loc></url>
+  <url><loc>https://example.com/contact.html</loc></url>
+  <url><loc>https://example.com/articles/running-shoes.html</loc></url>
+  <url><loc>https://example.com/articles/basketball-shoes.html</loc></url>
+  <url><loc>https://example.com/articles/football-boots.html</loc></url>
+  <url><loc>https://example.com/articles/hiking-shoes-boots.html</loc></url>
+  <url><loc>https://example.com/articles/sneakers.html</loc></url>
+  <url><loc>https://example.com/articles/loafers.html</loc></url>
+  <url><loc>https://example.com/articles/slip-ons-espadrilles.html</loc></url>
+  <url><loc>https://example.com/articles/sandals.html</loc></url>
+  <url><loc>https://example.com/articles/oxford-shoes.html</loc></url>
+  <url><loc>https://example.com/articles/derby-shoes.html</loc></url>
+  <url><loc>https://example.com/articles/brogues.html</loc></url>
+  <url><loc>https://example.com/articles/monk-straps.html</loc></url>
+  <url><loc>https://example.com/articles/chelsea-boots.html</loc></url>
+  <url><loc>https://example.com/articles/chukka-boots.html</loc></url>
+  <url><loc>https://example.com/articles/work-boots.html</loc></url>
+  <url><loc>https://example.com/articles/heels.html</loc></url>
+  <url><loc>https://example.com/articles/ballet-flats.html</loc></url>
+  <url><loc>https://example.com/articles/ankle-boots.html</loc></url>
+  <url><loc>https://example.com/category/athletic.html</loc></url>
+  <url><loc>https://example.com/category/casual.html</loc></url>
+  <url><loc>https://example.com/category/formal.html</loc></url>
+  <url><loc>https://example.com/category/boots.html</loc></url>
+  <url><loc>https://example.com/category/womens.html</loc></url>
+</urlset>

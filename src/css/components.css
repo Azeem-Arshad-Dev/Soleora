@@ -1,0 +1,70 @@
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 48px; padding: 0 22px; border-radius: 24px;
+  background: var(--ink); color: var(--chalk); text-decoration: none; font-weight: 600; border: 0; cursor: pointer;
+}
+.btn:hover { background: var(--accent); color: #fff; }
+.btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--chalk); }
+
+/* Formality pips */
+.pips { display: inline-flex; gap: 6px; vertical-align: middle; }
+.pips i { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--gum-ring); }
+.pips i.on { background: var(--gum); }
+
+/* Shoebox label (Quick Facts) */
+.shoebox-label {
+  border: 1.5px solid var(--ink);
+  padding: 0;
+  font-size: var(--s-14);
+  background: var(--chalk);
+}
+.shoebox-label header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 10px 14px; border-bottom: 1.5px solid var(--ink);
+  font-stretch: 75%; font-weight: 700; font-size: var(--s-19);
+}
+.shoebox-label header span { font-stretch: 100%; font-weight: 500; font-size: var(--s-14); }
+.shoebox-label dl { margin: 0; display: grid; grid-template-columns: auto 1fr; }
+.shoebox-label dt, .shoebox-label dd { margin: 0; padding: 9px 14px; border-bottom: 1px solid var(--rule); }
+.shoebox-label dt { color: var(--welt); padding-right: 6px; }
+.shoebox-label dd { font-weight: 500; }
+.shoebox-label dl > :nth-last-child(-n + 2) { border-bottom: 0; }
+.shoebox-label .barcode { display: flex; gap: 2px; height: 26px; padding: 0 14px 10px; align-items: stretch; }
+.shoebox-label .barcode b { background: var(--ink); }
+
+/* Listing grid: stills on their tints, no boxes */
+.shoe-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-6) var(--gap-5); }
+@media (max-width: 960px) { .shoe-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .shoe-grid { grid-template-columns: 1fr; } }
+.shoe-grid a { text-decoration: none; display: block; }
+.shoe-grid figure { margin: 0; }
+.shoe-grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--stage-tint); }
+.shoe-grid .cat { display: block; margin-top: var(--gap-3); color: var(--welt); font-size: var(--s-14); }
+.shoe-grid h3 { margin-top: 4px; }
+.shoe-grid p { margin-top: var(--gap-2); color: var(--welt); max-width: 40ch; }
+.shoe-grid a:hover h3 { color: var(--accent); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-3); margin-bottom: var(--gap-6); }
+.search { position: relative; flex: 1 1 280px; max-width: 420px; }
+.search input {
+  width: 100%; height: 48px; padding: 0 16px 0 44px; border-radius: 24px; border: 1px solid var(--rule);
+  background: var(--chalk); color: var(--ink); font: inherit; font-size: var(--s-16);
+}
+.search input:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 2px var(--accent); }
+.search svg { position: absolute; left: 16px; top: 15px; width: 18px; height: 18px; color: var(--welt); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--gap-2); }
+.chip {
+  height: 40px; padding: 0 16px; border-radius: 20px; border: 1px solid var(--rule); background: transparent; cursor: pointer; font-weight: 500;
+}
+.chip[aria-pressed='true'] { background: var(--ink); color: var(--chalk); border-color: var(--ink); }
+.result-count { color: var(--welt); margin-bottom: var(--gap-4); }
+.empty { padding: var(--gap-6) 0; font-size: var(--s-19); }
+.empty button { margin-top: var(--gap-3); }
+
+/* Category banner */
+.cat-banner { background: var(--stage-tint); padding: var(--gap-7) 0 var(--gap-6); margin-bottom: var(--gap-6); }
+.cat-banner p { font-size: var(--s-19); max-width: 52ch; margin-top: var(--gap-3); color: var(--ink); }
+.cat-links { display: flex; flex-wrap: wrap; gap: var(--gap-3); margin-top: var(--gap-7); }

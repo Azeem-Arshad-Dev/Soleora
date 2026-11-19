@@ -1,6 +1,8 @@
 [
   {
     "slug": "running-shoes",
+    "n": 1,
+    "name": "Running shoes",
     "title": "Running Shoes: How to Find Your Perfect Pair",
     "standfirst": "What actually matters in a running shoe, from midsole foam to fit, explained without the jargon.",
     "category": "athletic",
@@ -45,6 +47,8 @@
   },
   {
     "slug": "basketball-shoes",
+    "n": 2,
+    "name": "Basketball shoes",
     "title": "Basketball Shoes: Support, Grip and Style",
     "standfirst": "How the court shoe balances ankle support, traction and cushioning, and why it conquered the street.",
     "category": "athletic",
@@ -89,6 +93,8 @@
   },
   {
     "slug": "football-boots",
+    "n": 3,
+    "name": "Football boots",
     "title": "Football Boots and Cleats Explained",
     "standfirst": "How studs, uppers and soleplates work together, and how to pick the right boot for your pitch.",
     "category": "athletic",
@@ -133,6 +139,8 @@
   },
   {
     "slug": "hiking-shoes-boots",
+    "n": 4,
+    "name": "Hiking shoes",
     "title": "Hiking Shoes vs Hiking Boots",
     "standfirst": "Low shoes or ankle-high boots: how to choose the right trail footwear for your terrain and pack.",
     "category": "athletic",
@@ -177,6 +185,8 @@
   },
   {
     "slug": "sneakers",
+    "n": 5,
+    "name": "Sneakers",
     "title": "The Sneaker: From Court to Culture",
     "standfirst": "How a rubber-soled canvas sports shoe became the everyday footwear of the modern world.",
     "category": "casual",
@@ -221,6 +231,8 @@
   },
   {
     "slug": "loafers",
+    "n": 6,
+    "name": "Loafers",
     "title": "Loafers: Effortless Smart-Casual",
     "standfirst": "The laceless classic that bridges weekend chinos and office tailoring with quiet, easy confidence.",
     "category": "casual",
@@ -265,6 +277,8 @@
   },
   {
     "slug": "slip-ons-espadrilles",
+    "n": 7,
+    "name": "Espadrilles",
     "title": "Slip-ons and Espadrilles for Easy Summers",
     "standfirst": "Rope soles, soft canvas, and no laces: the easy warm-weather shoes worth knowing well.",
     "category": "casual",
@@ -304,6 +318,8 @@
   },
   {
     "slug": "sandals",
+    "n": 8,
+    "name": "Sandals",
     "title": "Sandals and Flip-flops: Choosing Well",
     "standfirst": "The oldest shoes we know of, and still easy to get wrong without a little know-how.",
     "category": "casual",
@@ -343,6 +359,8 @@
   },
   {
     "slug": "oxford-shoes",
+    "n": 9,
+    "name": "Oxfords",
     "title": "The Oxford: The Classic Dress Shoe",
     "standfirst": "Closed lacing and a sleek line make this the benchmark for formal footwear.",
     "category": "formal",
@@ -387,6 +405,8 @@
   },
   {
     "slug": "derby-shoes",
+    "n": 10,
+    "name": "Derbies",
     "title": "Derby Shoes: Versatile and Comfortable",
     "standfirst": "Open lacing makes the Derby a dress shoe that adapts easily to almost any outfit.",
     "category": "formal",
@@ -431,6 +451,8 @@
   },
   {
     "slug": "brogues",
+    "n": 11,
+    "name": "Brogues",
     "title": "Brogues: What the Holes Really Mean",
     "standfirst": "From boggy country fields to city streets, the story behind the dress shoe with holes.",
     "category": "formal",
@@ -475,6 +497,8 @@
   },
   {
     "slug": "monk-straps",
+    "n": 12,
+    "name": "Monk straps",
     "title": "Monk Straps: Buckles with Character",
     "standfirst": "A buckle instead of laces gives this classic dress shoe a confident, distinctive edge.",
     "category": "formal",
@@ -519,6 +543,8 @@
   },
   {
     "slug": "chelsea-boots",
+    "n": 13,
+    "name": "Chelsea boots",
     "title": "Chelsea Boots: A Wardrobe Essential",
     "standfirst": "How a Victorian riding boot with elastic sides became a sleek, modern staple for almost any outfit.",
     "category": "boots",
@@ -563,6 +589,8 @@
   },
   {
     "slug": "chukka-boots",
+    "n": 14,
+    "name": "Chukka boots",
     "title": "Chukka and Desert Boots",
     "standfirst": "Light, simple, and endlessly adaptable, these ankle boots bridge the gap between sneakers and dress shoes.",
     "category": "boots",
@@ -607,6 +635,8 @@
   },
   {
     "slug": "work-boots",
+    "n": 15,
+    "name": "Work boots",
     "title": "Work Boots: Toughness Explained",
     "standfirst": "What makes a work boot tough, from reinforced toes to lugged soles, and how to wear one well.",
     "category": "boots",
@@ -651,6 +681,8 @@
   },
   {
     "slug": "heels",
+    "n": 16,
+    "name": "Heels",
     "title": "Heels: A Guide to Heights and Styles",
     "standfirst": "From kitten heels to stilettos, a practical guide to choosing, wearing, and caring for heels.",
     "category": "womens",
@@ -695,6 +727,8 @@
   },
   {
     "slug": "ballet-flats",
+    "n": 17,
+    "name": "Ballet flats",
     "title": "Ballet Flats: Comfort Meets Elegance",
     "standfirst": "Inspired by dance slippers, ballet flats pair easy comfort with a neat, timeless look.",
     "category": "womens",
@@ -739,6 +773,8 @@
   },
   {
     "slug": "ankle-boots",
+    "n": 18,
+    "name": "Ankle boots",
     "title": "Ankle Boots for Every Season",
     "standfirst": "Versatile, comfortable, and easy to style, ankle boots earn their place in every season's wardrobe.",
     "category": "womens",
