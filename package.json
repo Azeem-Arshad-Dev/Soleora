@@ -1,0 +1,40 @@
+{
+  "name": "soleora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "generate": "node scripts/generate-pages.mjs",
+    "dev": "npm run generate && vite",
+    "build": "npm run generate && vite build",
+    "preview": "vite preview --port 4173",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azeem-Arshad-Dev/soleora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Azeem-Arshad-Dev/soleora/issues"
+  },
+  "homepage": "https://github.com/Azeem-Arshad-Dev/soleora#readme",
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.3.1",
+    "gsap": "^3.15.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "happy-dom": "^21.0.4",
+    "marked": "^18.2.1",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  },
+  "type": "module"
+}

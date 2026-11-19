@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Stills</title>
+<style>html,body{margin:0;background:#000}#s{width:var(--w,1600px);height:var(--h,1200px)}</style></head>
+<body><div id="s"></div>
+<script type="module">
+import { createStage, frameObject } from '/src/js/three/stage.js';
+import articles from '/src/data/articles.json';
+const q = new URLSearchParams(location.search);
+const slug = q.get('slug') || 'oxford-shoes';
+const a = articles.find((x) => x.slug === slug);
+const el = document.getElementById('s');
+el.style.setProperty('--w', (q.get('w') || 1600) + 'px');
+el.style.setProperty('--h', (q.get('h') || 1200) + 'px');
+const stage = createStage(el);
+stage.setTint(q.get('neutral') ? '#D5D9DC' : a.stageTint);
+const shoe = stage.addShoe(slug, 'high');
+const yaw = +(q.get('yaw') ?? a.view.yaw), pitch = +(q.get('pitch') ?? a.view.pitch);
+shoe.rotation.y = (yaw * Math.PI) / 180;
+const f = frameObject(stage, shoe, { fill: +(q.get('fill') || 0.62), baseAt: +(q.get('base') || 0.72), yaw, pitch });
+stage.camera.position.copy(f.position); stage.camera.lookAt(f.target);
+stage.renderNow();
+requestAnimationFrame(() => { stage.renderNow(); window.__ready = true; });
+</script></body></html>

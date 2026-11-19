@@ -1,0 +1,784 @@
+[
+  {
+    "slug": "running-shoes",
+    "title": "Running Shoes: How to Find Your Perfect Pair",
+    "standfirst": "What actually matters in a running shoe, from midsole foam to fit, explained without the jargon.",
+    "category": "athletic",
+    "excerpt": "Cushioning, drop, fit and care: a clear guide to choosing running shoes that suit your stride.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-02",
+    "readTime": 4,
+    "tags": [
+      "running",
+      "athletic",
+      "performance"
+    ],
+    "featured": true,
+    "formality": 1,
+    "stageTint": "#B7CCC3",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Cushioned midsole",
+        "anchor": "midsole"
+      },
+      {
+        "n": 2,
+        "label": "Breathable mesh upper",
+        "anchor": "vamp"
+      },
+      {
+        "n": 3,
+        "label": "Heel counter",
+        "anchor": "heel"
+      }
+    ],
+    "facts": {
+      "origin": "Britain, late 1800s",
+      "bestFor": "Road runs and daily training",
+      "materials": "Foam midsole, mesh, rubber"
+    }
+  },
+  {
+    "slug": "basketball-shoes",
+    "title": "Basketball Shoes: Support, Grip and Style",
+    "standfirst": "How the court shoe balances ankle support, traction and cushioning, and why it conquered the street.",
+    "category": "athletic",
+    "excerpt": "From canvas high-tops to modern court shoes: what makes a basketball shoe grip, support and last.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-03",
+    "readTime": 3,
+    "tags": [
+      "basketball",
+      "athletic",
+      "streetwear"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#B7CCC3",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "High collar for ankle support",
+        "anchor": "collar"
+      },
+      {
+        "n": 2,
+        "label": "Herringbone traction outsole",
+        "anchor": "sole"
+      },
+      {
+        "n": 3,
+        "label": "Lacing system",
+        "anchor": "laces"
+      }
+    ],
+    "facts": {
+      "origin": "United States, early 1900s",
+      "bestFor": "Indoor courts and casual streetwear",
+      "materials": "Leather, synthetics, rubber, foam"
+    }
+  },
+  {
+    "slug": "football-boots",
+    "title": "Football Boots and Cleats Explained",
+    "standfirst": "How studs, uppers and soleplates work together, and how to pick the right boot for your pitch.",
+    "category": "athletic",
+    "excerpt": "Studs, surfaces, materials and fit: everything you need to choose football boots that suit your game.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-04",
+    "readTime": 3,
+    "tags": [
+      "football",
+      "soccer",
+      "athletic"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#B7CCC3",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Studded soleplate",
+        "anchor": "studs"
+      },
+      {
+        "n": 2,
+        "label": "Low-profile upper",
+        "anchor": "vamp"
+      },
+      {
+        "n": 3,
+        "label": "Laces for lockdown",
+        "anchor": "laces"
+      }
+    ],
+    "facts": {
+      "origin": "Britain, 19th century",
+      "bestFor": "Playing on grass and turf",
+      "materials": "Leather or synthetics, plastic soleplate"
+    }
+  },
+  {
+    "slug": "hiking-shoes-boots",
+    "title": "Hiking Shoes vs Hiking Boots",
+    "standfirst": "Low shoes or ankle-high boots: how to choose the right trail footwear for your terrain and pack.",
+    "category": "athletic",
+    "excerpt": "Lugs, toe bumpers and fit: how to decide between hiking shoes and boots for your next trail.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-05",
+    "readTime": 3,
+    "tags": [
+      "hiking",
+      "outdoor",
+      "trail"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#B7CCC3",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Deep lugged outsole",
+        "anchor": "lugs"
+      },
+      {
+        "n": 2,
+        "label": "Protective toe bumper",
+        "anchor": "toeCap"
+      },
+      {
+        "n": 3,
+        "label": "Padded collar",
+        "anchor": "collar"
+      }
+    ],
+    "facts": {
+      "origin": "European Alps, 19th century",
+      "bestFor": "Trails, hills and backpacking",
+      "materials": "Leather, nylon mesh, lugged rubber"
+    }
+  },
+  {
+    "slug": "sneakers",
+    "title": "The Sneaker: From Court to Culture",
+    "standfirst": "How a rubber-soled canvas sports shoe became the everyday footwear of the modern world.",
+    "category": "casual",
+    "excerpt": "Vulcanized soles, canvas uppers and a rich history: the story and styling of the classic sneaker.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-06",
+    "readTime": 3,
+    "tags": [
+      "sneakers",
+      "casual",
+      "streetwear"
+    ],
+    "featured": true,
+    "formality": 2,
+    "stageTint": "#CBC2DE",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Vulcanized rubber sole",
+        "anchor": "sole"
+      },
+      {
+        "n": 2,
+        "label": "Canvas upper",
+        "anchor": "vamp"
+      },
+      {
+        "n": 3,
+        "label": "Lace-up front",
+        "anchor": "laces"
+      }
+    ],
+    "facts": {
+      "origin": "Britain and United States, late 1800s",
+      "bestFor": "Everyday casual wear",
+      "materials": "Canvas, vulcanized rubber"
+    }
+  },
+  {
+    "slug": "loafers",
+    "title": "Loafers: Effortless Smart-Casual",
+    "standfirst": "The laceless classic that bridges weekend chinos and office tailoring with quiet, easy confidence.",
+    "category": "casual",
+    "excerpt": "Penny straps, moccasin stitching and fit: how to choose, wear and care for a classic pair of loafers.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-07",
+    "readTime": 3,
+    "tags": [
+      "loafers",
+      "smart-casual",
+      "leather"
+    ],
+    "featured": false,
+    "formality": 3,
+    "stageTint": "#CBC2DE",
+    "view": {
+      "yaw": -30,
+      "pitch": 18
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Moccasin apron stitching",
+        "anchor": "vamp"
+      },
+      {
+        "n": 2,
+        "label": "Penny strap saddle",
+        "anchor": "strap"
+      },
+      {
+        "n": 3,
+        "label": "Low stacked heel",
+        "anchor": "heelBlock"
+      }
+    ],
+    "facts": {
+      "origin": "Norway and North America, 1930s",
+      "bestFor": "Smart-casual and relaxed office wear",
+      "materials": "Calf leather or suede"
+    }
+  },
+  {
+    "slug": "slip-ons-espadrilles",
+    "title": "Slip-ons and Espadrilles for Easy Summers",
+    "standfirst": "Rope soles, soft canvas, and no laces: the easy warm-weather shoes worth knowing well.",
+    "category": "casual",
+    "excerpt": "From Pyrenean rope soles to laceless canvas sneakers, how to choose and wear summer's easiest shoes.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-08",
+    "readTime": 3,
+    "tags": [
+      "espadrilles",
+      "slip-ons",
+      "summer"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#CBC2DE",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Jute rope sole",
+        "anchor": "juteSole"
+      },
+      {
+        "n": 2,
+        "label": "Canvas upper",
+        "anchor": "vamp"
+      }
+    ],
+    "facts": {
+      "origin": "Pyrenees, Spain and France, centuries old",
+      "bestFor": "Beach towns and summer weekends",
+      "materials": "Jute rope, canvas, rubber"
+    }
+  },
+  {
+    "slug": "sandals",
+    "title": "Sandals and Flip-flops: Choosing Well",
+    "standfirst": "The oldest shoes we know of, and still easy to get wrong without a little know-how.",
+    "category": "casual",
+    "excerpt": "What separates a sandal you can walk in all day from one that leaves your feet aching by lunch.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-09",
+    "readTime": 3,
+    "tags": [
+      "sandals",
+      "flip-flops",
+      "summer"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#CBC2DE",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Adjustable straps",
+        "anchor": "strap"
+      },
+      {
+        "n": 2,
+        "label": "Contoured footbed",
+        "anchor": "sole"
+      }
+    ],
+    "facts": {
+      "origin": "Prehistoric, worldwide, 9,000+ years ago",
+      "bestFor": "Hot days and casual outings",
+      "materials": "Leather, cork, rubber, foam"
+    }
+  },
+  {
+    "slug": "oxford-shoes",
+    "title": "The Oxford: The Classic Dress Shoe",
+    "standfirst": "Closed lacing and a sleek line make this the benchmark for formal footwear.",
+    "category": "formal",
+    "excerpt": "Why the closed-laced Oxford remains the go-to dress shoe, and how to choose, fit, and care for one.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-10",
+    "readTime": 3,
+    "tags": [
+      "oxfords",
+      "dress shoes",
+      "formal"
+    ],
+    "featured": true,
+    "formality": 4,
+    "stageTint": "#C6B8AD",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Closed lacing",
+        "anchor": "laces"
+      },
+      {
+        "n": 2,
+        "label": "Cap toe",
+        "anchor": "toeCap"
+      },
+      {
+        "n": 3,
+        "label": "Stacked leather heel",
+        "anchor": "heelBlock"
+      }
+    ],
+    "facts": {
+      "origin": "England, early nineteenth century",
+      "bestFor": "Suits, interviews, and formal events",
+      "materials": "Calfskin leather, leather soles"
+    }
+  },
+  {
+    "slug": "derby-shoes",
+    "title": "Derby Shoes: Versatile and Comfortable",
+    "standfirst": "Open lacing makes the Derby a dress shoe that adapts easily to almost any outfit.",
+    "category": "formal",
+    "excerpt": "How open lacing makes the Derby comfortable, adaptable, and smart enough for suits or jeans.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-11",
+    "readTime": 3,
+    "tags": [
+      "derby shoes",
+      "dress shoes",
+      "smart casual"
+    ],
+    "featured": false,
+    "formality": 3,
+    "stageTint": "#C6B8AD",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Open lacing",
+        "anchor": "laces"
+      },
+      {
+        "n": 2,
+        "label": "Plain toe",
+        "anchor": "toe"
+      },
+      {
+        "n": 3,
+        "label": "Leather sole",
+        "anchor": "sole"
+      }
+    ],
+    "facts": {
+      "origin": "Europe, nineteenth-century sporting boots",
+      "bestFor": "Smart casual and relaxed offices",
+      "materials": "Calfskin, suede, grained leather"
+    }
+  },
+  {
+    "slug": "brogues",
+    "title": "Brogues: What the Holes Really Mean",
+    "standfirst": "From boggy country fields to city streets, the story behind the dress shoe with holes.",
+    "category": "formal",
+    "excerpt": "Why brogues have holes, how to read the styles, and how to wear them from office to weekend.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-12",
+    "readTime": 3,
+    "tags": [
+      "brogues",
+      "wingtips",
+      "dress shoes"
+    ],
+    "featured": false,
+    "formality": 3,
+    "stageTint": "#C6B8AD",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Decorative perforations",
+        "anchor": "broguing"
+      },
+      {
+        "n": 2,
+        "label": "Wingtip toe cap",
+        "anchor": "toeCap"
+      },
+      {
+        "n": 3,
+        "label": "Lacing",
+        "anchor": "laces"
+      }
+    ],
+    "facts": {
+      "origin": "Rural Scotland and Ireland",
+      "bestFor": "Smart casual and tweed tailoring",
+      "materials": "Calfskin, suede, leather soles"
+    }
+  },
+  {
+    "slug": "monk-straps",
+    "title": "Monk Straps: Buckles with Character",
+    "standfirst": "A buckle instead of laces gives this classic dress shoe a confident, distinctive edge.",
+    "category": "formal",
+    "excerpt": "Single or double buckle, suede or calf: how to choose, wear, and care for monk strap shoes.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-13",
+    "readTime": 3,
+    "tags": [
+      "monk straps",
+      "dress shoes",
+      "buckles"
+    ],
+    "featured": false,
+    "formality": 3,
+    "stageTint": "#C6B8AD",
+    "view": {
+      "yaw": -40,
+      "pitch": 14
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Buckled strap",
+        "anchor": "buckle"
+      },
+      {
+        "n": 2,
+        "label": "Plain vamp",
+        "anchor": "vamp"
+      },
+      {
+        "n": 3,
+        "label": "Leather heel",
+        "anchor": "heelBlock"
+      }
+    ],
+    "facts": {
+      "origin": "Europe, said to be Alpine monks",
+      "bestFor": "Modern offices and dressy events",
+      "materials": "Calfskin, suede, metal buckles"
+    }
+  },
+  {
+    "slug": "chelsea-boots",
+    "title": "Chelsea Boots: A Wardrobe Essential",
+    "standfirst": "How a Victorian riding boot with elastic sides became a sleek, modern staple for almost any outfit.",
+    "category": "boots",
+    "excerpt": "The laceless Victorian boot that conquered 1960s London and still works with suits and jeans alike.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-14",
+    "readTime": 3,
+    "tags": [
+      "boots",
+      "classic",
+      "leather"
+    ],
+    "featured": true,
+    "formality": 3,
+    "stageTint": "#CFB894",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Elastic side panel",
+        "anchor": "elastic"
+      },
+      {
+        "n": 2,
+        "label": "Pull tab",
+        "anchor": "pullTab"
+      },
+      {
+        "n": 3,
+        "label": "Low stacked heel",
+        "anchor": "heelBlock"
+      }
+    ],
+    "facts": {
+      "origin": "Victorian England, 1840s",
+      "bestFor": "Smart-casual and tailored outfits",
+      "materials": "Calf leather, suede, elastic"
+    }
+  },
+  {
+    "slug": "chukka-boots",
+    "title": "Chukka and Desert Boots",
+    "standfirst": "Light, simple, and endlessly adaptable, these ankle boots bridge the gap between sneakers and dress shoes.",
+    "category": "boots",
+    "excerpt": "From polo grounds and wartime bazaars to everyday style, the story of two-eyelet ankle boots.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-15",
+    "readTime": 3,
+    "tags": [
+      "boots",
+      "suede",
+      "smart-casual"
+    ],
+    "featured": false,
+    "formality": 2,
+    "stageTint": "#CFB894",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Two-eyelet lacing",
+        "anchor": "laces"
+      },
+      {
+        "n": 2,
+        "label": "Ankle-height shaft",
+        "anchor": "shaft"
+      },
+      {
+        "n": 3,
+        "label": "Crepe sole",
+        "anchor": "sole"
+      }
+    ],
+    "facts": {
+      "origin": "Britain and North Africa, early 1900s",
+      "bestFor": "Relaxed weekends and casual offices",
+      "materials": "Suede, leather, crepe rubber"
+    }
+  },
+  {
+    "slug": "work-boots",
+    "title": "Work Boots: Toughness Explained",
+    "standfirst": "What makes a work boot tough, from reinforced toes to lugged soles, and how to wear one well.",
+    "category": "boots",
+    "excerpt": "Built for job sites, loved everywhere: the features and care behind a truly durable boot.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-16",
+    "readTime": 3,
+    "tags": [
+      "boots",
+      "rugged",
+      "durable"
+    ],
+    "featured": false,
+    "formality": 1,
+    "stageTint": "#CFB894",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Reinforced toe",
+        "anchor": "toeCap"
+      },
+      {
+        "n": 2,
+        "label": "Lugged outsole",
+        "anchor": "lugs"
+      },
+      {
+        "n": 3,
+        "label": "Tall laced shaft",
+        "anchor": "laces"
+      }
+    ],
+    "facts": {
+      "origin": "Industrial era, 19th-20th century",
+      "bestFor": "Tough jobs and rugged casual wear",
+      "materials": "Full-grain leather, rubber soles"
+    }
+  },
+  {
+    "slug": "heels",
+    "title": "Heels: A Guide to Heights and Styles",
+    "standfirst": "From kitten heels to stilettos, a practical guide to choosing, wearing, and caring for heels.",
+    "category": "womens",
+    "excerpt": "Stilettos, blocks, and kitten heels explained, with tips on fit, comfort, and when to wear each.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-17",
+    "readTime": 3,
+    "tags": [
+      "heels",
+      "formal",
+      "womenswear"
+    ],
+    "featured": false,
+    "formality": 4,
+    "stageTint": "#BFC9D8",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Stiletto heel",
+        "anchor": "heelBlock"
+      },
+      {
+        "n": 2,
+        "label": "Pointed toe",
+        "anchor": "toe"
+      },
+      {
+        "n": 3,
+        "label": "Arched sole",
+        "anchor": "sole"
+      }
+    ],
+    "facts": {
+      "origin": "Persia, later 17th-century Europe",
+      "bestFor": "Formal events and polished looks",
+      "materials": "Leather, suede, satin"
+    }
+  },
+  {
+    "slug": "ballet-flats",
+    "title": "Ballet Flats: Comfort Meets Elegance",
+    "standfirst": "Inspired by dance slippers, ballet flats pair easy comfort with a neat, timeless look.",
+    "category": "womens",
+    "excerpt": "The dance-inspired flat that slips into a bag and works with jeans, skirts, and dresses.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-18",
+    "readTime": 3,
+    "tags": [
+      "flats",
+      "comfort",
+      "everyday"
+    ],
+    "featured": false,
+    "formality": 2,
+    "stageTint": "#BFC9D8",
+    "view": {
+      "yaw": -35,
+      "pitch": 12
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Bow at the vamp",
+        "anchor": "bow"
+      },
+      {
+        "n": 2,
+        "label": "Low-cut topline",
+        "anchor": "collar"
+      },
+      {
+        "n": 3,
+        "label": "Flexible flat sole",
+        "anchor": "sole"
+      }
+    ],
+    "facts": {
+      "origin": "European dance slippers, 1950s streetwear",
+      "bestFor": "Everyday wear and travel",
+      "materials": "Soft leather, suede, fabric"
+    }
+  },
+  {
+    "slug": "ankle-boots",
+    "title": "Ankle Boots for Every Season",
+    "standfirst": "Versatile, comfortable, and easy to style, ankle boots earn their place in every season's wardrobe.",
+    "category": "womens",
+    "excerpt": "Block heels, side zips, and smart styling tips for the most versatile boot you can own.",
+    "author": "Soleora Editorial",
+    "date": "2026-11-19",
+    "readTime": 3,
+    "tags": [
+      "boots",
+      "versatile",
+      "seasonal"
+    ],
+    "featured": false,
+    "formality": 3,
+    "stageTint": "#BFC9D8",
+    "view": {
+      "yaw": 35,
+      "pitch": 10
+    },
+    "hotspots": [
+      {
+        "n": 1,
+        "label": "Block heel",
+        "anchor": "heelBlock"
+      },
+      {
+        "n": 2,
+        "label": "Side zip",
+        "anchor": "zip"
+      },
+      {
+        "n": 3,
+        "label": "Ankle-height shaft",
+        "anchor": "shaft"
+      }
+    ],
+    "facts": {
+      "origin": "Europe, 19th century",
+      "bestFor": "Year-round everyday outfits",
+      "materials": "Leather, suede, rubber soles"
+    }
+  }
+]

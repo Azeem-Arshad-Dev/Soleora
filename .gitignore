@@ -1,0 +1,6 @@
+node_modules/
+dist/
+/articles/
+/category/
+tests/e2e/shots/
+.DS_Store
