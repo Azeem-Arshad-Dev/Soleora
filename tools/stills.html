@@ -14,6 +14,7 @@ el.style.setProperty('--h', (q.get('h') || 1200) + 'px');
 const stage = createStage(el);
 stage.setTint(q.get('neutral') ? '#D5D9DC' : a.stageTint);
 const shoe = stage.addShoe(slug, 'high');
+await shoe.userData.ready;
 const yaw = +(q.get('yaw') ?? a.view.yaw), pitch = +(q.get('pitch') ?? a.view.pitch);
 shoe.rotation.y = (yaw * Math.PI) / 180;
 const f = frameObject(stage, shoe, { fill: +(q.get('fill') || 0.62), baseAt: +(q.get('base') || 0.72), yaw, pitch });

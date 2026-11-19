@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { buildShoe } from '../shoes/build.js';
+import { hasModel, loadModel } from '../shoes/models.js';
 
 const STUDIO = '#D5D9DC';
 const DARK_STAGE = '#20262D';
@@ -118,15 +119,36 @@ export function createStage(el, { tier = 'full' } = {}) {
     get size() { return { w, h }; },
     get tint() { return tint.clone(); },
     getShoe,
-    /** Adds a fresh clone of a shoe (shares geometry/materials) to the scene. */
+    /**
+     * Adds a shoe to the scene inside a holder group. If a ready-made model exists it replaces the
+     * procedural shoe once loaded (holder.userData.ready resolves either way).
+     */
     addShoe(slug, quality = 'high') {
       const { group, anchors } = getShoe(slug, quality);
-      const g = group.clone(true);
-      g.userData = { ...group.userData, anchors };
-      g.traverse((o) => { if (o.isMesh) o.castShadow = true; });
-      scene.add(g);
+      const holder = new THREE.Group();
+      holder.name = slug;
+      const proc = group.clone(true);
+      proc.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+      holder.add(proc);
+      holder.userData = { ...group.userData, slug, anchors: { ...anchors }, model: false };
+      if (hasModel(slug)) {
+        proc.visible = false;
+        holder.userData.ready = loadModel(slug, anchors).then((m) => {
+          holder.remove(proc);
+          holder.add(m.group.clone(true));
+          Object.assign(holder.userData, { height: m.height, width: m.width, anchors: { ...m.anchors }, model: true });
+          dirty = true;
+        }).catch((err) => {
+          console.warn(`Model for ${slug} failed, using the built-in shoe`, err);
+          proc.visible = true;
+          dirty = true;
+        });
+      } else {
+        holder.userData.ready = Promise.resolve();
+      }
+      scene.add(holder);
       dirty = true;
-      return g;
+      return holder;
     },
     remove(obj) { scene.remove(obj); dirty = true; },
     setTint(hex) { applyTint(themeStageColor(hex)); dirty = true; },

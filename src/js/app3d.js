@@ -445,11 +445,12 @@ export function start(opts) {
   document.fonts?.ready.then(() => sync());
   document.addEventListener('soleora:theme', () => { stage.setTint(tintHex); });
 
-  requestAnimationFrame(() => {
+  const first = current?.type === 'article' ? heroShoe : rail.focusedGroup();
+  Promise.race([first?.userData.ready || Promise.resolve(), new Promise((r) => setTimeout(r, 6000))]).then(() => requestAnimationFrame(() => {
     stage.renderNow();
     stageEl.classList.add('is-ready');
     document.querySelectorAll('.hero-still').forEach((img) => img.classList.add('is-covered'));
     window.__soleora.ready = true;
     window.__soleora.debug = { go, get mode() { return mode; }, get busy() { return busy; }, get focus() { return rail.index; }, stageRect, slotRect };
-  });
+  }));
 }

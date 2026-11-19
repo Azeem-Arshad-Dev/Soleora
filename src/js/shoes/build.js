@@ -363,7 +363,13 @@ export function buildShoe(slug, { quality = 'high' } = {}) {
   }
   if (!anchors.heel) anchors.heel = onUpper(last, 0.03, 0.6, 1, 0.012);
 
-  // ---- Normalise: length 1 along x, sole on y = 0, centred on x and z.
+  const norm = normalizeGroup(group, anchors);
+  group.userData = { slug, height: norm.height, width: norm.width, anchors };
+  return { group, anchors };
+}
+
+/** Normalises any shoe group in place: length 1 along x, sole on y = 0, centred. Anchors are remapped. */
+export function normalizeGroup(group, anchors = {}) {
   group.updateMatrixWorld(true);
   const box = new THREE.Box3().setFromObject(group);
   const size = box.getSize(new THREE.Vector3());
@@ -378,6 +384,6 @@ export function buildShoe(slug, { quality = 'high' } = {}) {
     const v = anchors[k];
     anchors[k] = new THREE.Vector3((v.x - cx) * s, (v.y - box.min.y) * s, (v.z - cz) * s);
   }
-  group.userData = { slug, height: size.y * s, width: size.z * s, anchors };
-  return { group, anchors };
+  group.updateMatrixWorld(true);
+  return { height: size.y * s, width: size.z * s };
 }

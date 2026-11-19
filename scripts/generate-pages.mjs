@@ -8,6 +8,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const OUT = path.resolve(process.argv[2] || ROOT);
 const SITE = 'https://example.com';
 const articles = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/articles.json'), 'utf8'));
+const models = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/models.json'), 'utf8'));
 
 export const CATEGORIES = {
   athletic: { name: 'Athletic', text: 'Shoes built for movement: running, court, pitch and trail. Each one is shaped by the sport it serves.' },
@@ -86,7 +87,7 @@ function footer() {
     </div>
     <div><h2>Categories</h2><ul>${cats}</ul></div>
     <div><h2>Soleora</h2><ul><li><a href="/articles.html">All shoes</a></li><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
-    <p class="legal">Soleora &copy; 2026. Shoe models are generated in code for this site.</p>
+    <p class="legal">Soleora &copy; 2026. 3D model credits are on the <a href="/about.html">About</a> page.</p>
   </div>
 </footer>
 <button class="icon-btn back-to-top" aria-label="Back to top">${ICON.up}</button>
@@ -272,6 +273,15 @@ function categoryPage(key) {
   return page({ headHtml: head({ title: `${c.name} | Soleora`, description: c.text, canonical: `/category/${key}.html`, image: `/og/${list[0].slug}.webp` }), current: 'articles', main, page: 'category', tint: tintVar(key) });
 }
 
+function creditsHtml() {
+  const rows = Object.entries(models).map(([slug, m]) => {
+    const a = articles.find((x) => x.slug === slug);
+    const c = m.credit || {};
+    return `<li>${esc(a ? a.name : slug)}: "${esc(c.title)}" by ${esc(c.author)}, ${esc(c.license)}${c.url ? ` (<a href="${esc(c.url)}">source</a>)` : ''}</li>`;
+  });
+  return rows.length ? `<p>3D models used under their licences:</p><ul>${rows.join('')}</ul><p>All other shoes are generated in code for this site.</p>` : '<p>All shoes are generated in code for this site.</p>';
+}
+
 function simplePage(file, title, description, current, body) {
   return page({ headHtml: head({ title: `${title} | Soleora`, description, canonical: `/${file}` }), current, main: `<div class="wrap"><header class="page-head"><h1>${title}</h1></header><div class="prose-page">${body}</div></div>`, page: 'plain' });
 }
@@ -284,7 +294,9 @@ export function generate(out = OUT) {
   Object.keys(CATEGORIES).forEach((k) => write(`category/${k}.html`, categoryPage(k)));
   write('about.html', simplePage('about.html', 'About Soleora', 'What Soleora is and how the articles are written.', 'about',
     `<p>Soleora is a showroom for the shoes most people own, or wonder about. Each of the eighteen styles here gets a short, plain-spoken article: where it came from, the features that give it away, what it is made of, when to wear it, how it should fit and how to look after it.</p>
-<p>The shoes in the showroom are built in code, not photographed. That keeps the collection consistent and lets you turn every pair in your hands, but it also means they are simplified. Think of them as a cobbler's sketch rather than a product photo.</p>
+<p>Every shoe in the showroom is a 3D model you can turn in your hands. Where a suitable openly licensed model exists we use it, credited below; the rest are built in code, so think of those as a cobbler's sketch rather than a product photo.</p>
+<h2>Credits</h2>
+${creditsHtml()}
 <h2>How we write</h2>
 <p>We avoid prices, brand endorsements and claims we can't support. Where history is uncertain, we say so. If you spot something wrong, tell us and we'll fix it.</p>`));
   write('contact.html', simplePage('contact.html', 'Contact', 'Get in touch with Soleora.', 'contact',

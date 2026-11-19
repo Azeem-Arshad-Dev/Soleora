@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { frameObject } from './stage.js';
 
 const D2R = Math.PI / 180;
+const ZERO = new THREE.Vector3();
 
 export function heroPose(stage, shoe, entry) {
   const narrow = stage.size.w < 600;
@@ -17,7 +18,6 @@ export function heroPose(stage, shoe, entry) {
 export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } = {}) {
   const pinsEl = document.getElementById('pins');
   const state = { yaw: shoe.rotation.y, follow: true };
-  const anchors = shoe.userData.anchors || {};
   const pins = entry.hotspots.map((h) => {
     const b = document.createElement('button');
     b.className = 'pin is-hidden';
@@ -26,7 +26,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     b.setAttribute('aria-label', `${h.n}: ${h.label}`);
     b.dataset.n = h.n;
     pinsEl.appendChild(b);
-    return { h, el: b, local: anchors[h.anchor]?.clone() || new THREE.Vector3(), shown: false };
+    return { h, el: b, get local() { return shoe.userData.anchors?.[h.anchor] || ZERO; }, shown: false };
   });
   let pinsOn = false;
   const center = new THREE.Vector3();
@@ -78,6 +78,20 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
   el.addEventListener('pointermove', move);
   el.addEventListener('pointerup', up);
   el.addEventListener('pointercancel', up);
+
+  // Dev helper: add ?pick to an article URL, click the shoe, copy the logged anchor into src/data/models.json.
+  if (new URLSearchParams(location.search).has('pick')) {
+    el.addEventListener('click', (e) => {
+      const r = el.getBoundingClientRect();
+      const rc = new THREE.Raycaster();
+      rc.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), stage.camera);
+      const hit = rc.intersectObject(shoe, true)[0];
+      if (hit) {
+        const local = shoe.worldToLocal(hit.point.clone().addScaledVector(hit.face.normal.clone().transformDirection(hit.object.matrixWorld), 0.012));
+        console.log(`[pick] ${entry.slug}:`, JSON.stringify(local.toArray().map((x) => +x.toFixed(4))));
+      }
+    });
+  }
 
   const turnTo = (yaw) => gsap.to(state, { yaw, duration: 0.7, ease: 'power3.inOut', onUpdate: () => stage.requestRender() });
 

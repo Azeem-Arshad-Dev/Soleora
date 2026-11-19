@@ -1,0 +1,17 @@
+{
+  "running-shoes": {
+    "file": "/models/running-shoes.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Materials Variants Shoe",
+      "author": "Shopify",
+      "license": "CC BY 4.0",
+      "url": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe"
+    },
+    "anchors": {}
+  }
+}
