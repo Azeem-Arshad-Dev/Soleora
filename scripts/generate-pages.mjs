@@ -25,7 +25,8 @@ const tintVar = (cat) => `var(--tint-${cat})`;
 
 const ICON = {
   sole: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2.5c3.4 0 5.2 2.5 5.2 6 0 2.6-1 4.4-1 6.6 0 2.8 1.3 4.4-1.9 4.4H9.2c-2.7 0-3.6-2.3-3.6-5.8 0-2.8.8-4.5.8-6.6 0-2.8.5-4.6 2.6-4.6z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
-  moon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+  sun: '<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  moon: '<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
   menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -36,12 +37,12 @@ const ICON = {
   rotR: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-function head({ title, description, canonical, image = '/og/oxford-shoes.webp', type = 'website', jsonld = [] }) {
+function head({ title, description, canonical, image = '/og/oxford-shoes.webp', type = 'website', jsonld = [], noindex = false }) {
   return `<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${url(canonical)}">
+${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${url(canonical)}">`}
 <meta property="og:type" content="${type}">
 <meta property="og:site_name" content="Soleora">
 <meta property="og:title" content="${esc(title)}">
@@ -49,7 +50,8 @@ function head({ title, description, canonical, image = '/og/oxford-shoes.webp', 
 <meta property="og:url" content="${url(canonical)}">
 <meta property="og:image" content="${url(image)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#EEF0EF">
+<meta name="theme-color" content="#EEF0EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171B20" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/src/css/main.css">
@@ -70,7 +72,7 @@ function header(current) {
         ${link('/about.html', 'About', 'about')}
         ${link('/contact.html', 'Contact', 'contact')}
       </ul>
-      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode">${ICON.moon}<span class="theme-label">Dark</span></button>
+      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode">${ICON.moon}${ICON.sun}<span class="theme-label">Dark</span></button>
     </nav>
   </div>
 </header>
@@ -118,7 +120,7 @@ function card(a, { headingLevel = 3, lazy = true } = {}) {
   return `<li data-cat="${a.category}" data-slug="${a.slug}" data-text="${esc([a.title, a.name, a.excerpt, cat, ...a.tags].join(' ').toLowerCase())}">
   <a href="/articles/${a.slug}.html" data-shoe="${a.slug}">
     <figure>
-      <img src="/stills/${a.slug}.webp" width="800" height="600" alt="${esc(a.name)}, shown on a ${cat.toLowerCase()} backdrop"${lazy ? ' loading="lazy"' : ''} style="--stage-tint:${tintVar(a.category)}">
+      <img src="/stills/${a.slug}.webp" width="800" height="600" alt="${esc(a.name)}, three-quarter view"${lazy ? ' loading="lazy"' : ''} style="--stage-tint:${tintVar(a.category)}">
       <figcaption><span class="cat">${cat}</span><h${headingLevel}>${esc(a.name)}</h${headingLevel}><p>${esc(a.excerpt)}</p></figcaption>
     </figure>
   </a>
@@ -158,7 +160,7 @@ function articlePage(a, i) {
   <header class="article-head">
     <div class="article-title">
       <a class="cat" href="/category/${a.category}.html">${cat.name}</a>
-      <h1>${esc(a.title)}</h1>
+      <h1>${displayTitle(a.title)}</h1>
       <p class="standfirst">${esc(a.standfirst)}</p>
       <p class="meta">${a.readTime} minute read, published ${fmtDate(a.date)}.</p>
     </div>
@@ -190,7 +192,7 @@ function articlePage(a, i) {
       <ul class="tags" aria-label="Tags">${a.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
       <a class="next-shoe" href="/articles/${next.slug}.html" data-next="${next.slug}">
         <img src="/stills/${next.slug}.webp" width="800" height="600" alt="" loading="lazy">
-        <div><span>Next shoe</span><strong>${esc(next.name)}</strong></div>
+        <div><span>Next shoe</span><strong>${esc(next.name)}</strong></div>${ICON.next}
       </a>
     </article>
   </div>
@@ -213,7 +215,7 @@ function homePage() {
   <div class="wrap">
     <div class="showroom__intro">
       <h1>Pick one up. We'll tell you where it's been.</h1>
-      <p>Eighteen shoes, taken apart and explained. Drag the rail, then open the one in front.</p>
+      <p>Eighteen shoes, taken apart and explained. <span class="if-3d">Drag the rail, then open the one in front.</span><span class="if-stills">Pick any of them below.</span></p>
     </div>
     <div class="showroom__index fade-swap" aria-hidden="true"><span class="num tnum">${featured.n}</span><span class="of">of ${articles.length}</span></div>
     <div class="showroom__focus">
@@ -253,11 +255,11 @@ function listingPage() {
   const main = `<div class="wrap">
   <header class="page-head"><h1>All shoes</h1><p>Eighteen styles, from trail to black tie. Search by name, or narrow it down by category.</p></header>
   <div class="filters" role="search">
-    <label class="search">${ICON.search}<span class="sr-only">Search shoes</span><input type="search" id="q" placeholder="Search, for example boots or leather" autocomplete="off"></label>
+    <label class="search">${ICON.search}<span class="sr-only">Search shoes</span><input type="search" id="q" placeholder="Search shoes" autocomplete="off"></label>
     <div class="chips" aria-label="Filter by category">${chips}</div>
   </div>
   <p class="result-count" id="count" aria-live="polite">Showing all ${articles.length} shoes</p>
-  <ul class="shoe-grid" id="grid">${articles.map((a) => card(a)).join('')}</ul>
+  <ul class="shoe-grid" id="grid">${articles.map((a, i) => card(a, { headingLevel: 2, lazy: i > 2 })).join('')}</ul>
   <div class="empty" id="empty" hidden><p>No shoes match that search. Try a broader word, or clear the filters.</p><button class="btn btn--ghost" id="clear" type="button">Clear filters</button></div>
 </div>`;
   return page({ headHtml: head({ title: 'All shoes | Soleora', description: 'Browse all eighteen shoes on Soleora, from running shoes to Oxfords.', canonical: '/articles.html' }), current: 'articles', main, page: 'listing' });
@@ -268,22 +270,26 @@ function categoryPage(key) {
   const list = articles.filter((a) => a.category === key);
   const others = Object.entries(CATEGORIES).filter(([k]) => k !== key).map(([k, o]) => `<a class="btn btn--ghost" href="/category/${k}.html">${o.name}</a>`).join('');
   const main = `<section class="cat-banner"><div class="wrap"><h1>${c.name}</h1><p>${c.text}</p></div></section>
-<div class="wrap"><ul class="shoe-grid">${list.map((a) => card(a, { lazy: false })).join('')}</ul>
+<div class="wrap"><ul class="shoe-grid">${list.map((a) => card(a, { lazy: false, headingLevel: 2 })).join('')}</ul>
 <div class="cat-links">${others}</div></div>`;
   return page({ headHtml: head({ title: `${c.name} | Soleora`, description: c.text, canonical: `/category/${key}.html`, image: `/og/${list[0].slug}.webp` }), current: 'articles', main, page: 'category', tint: tintVar(key) });
 }
 
 function creditsHtml() {
-  const rows = Object.entries(models).map(([slug, m]) => {
-    const a = articles.find((x) => x.slug === slug);
-    const c = m.credit || {};
-    return `<li>${esc(a ? a.name : slug)}: "${esc(c.title)}" by ${esc(c.author)}, ${esc(c.license)}${c.url ? ` (<a href="${esc(c.url)}">source</a>)` : ''}</li>`;
+  const rows = articles.filter((a) => models[a.slug]).map((a) => {
+    const c = models[a.slug].credit || {};
+    return `<tr><td>${esc(a.name)}</td><td>${c.url ? `<a href="${esc(c.url)}">${esc(c.title)}</a>` : esc(c.title)}</td><td>${esc(c.author)}</td><td>${esc(c.license)}</td></tr>`;
   });
-  return rows.length ? `<p>3D models used under their licences:</p><ul>${rows.join('')}</ul><p>All other shoes are generated in code for this site.</p>` : '<p>All shoes are generated in code for this site.</p>';
+  const coded = articles.filter((a) => !models[a.slug]).map((a) => a.name.toLowerCase());
+  return `<table class="credits-table"><thead><tr><th>Shoe</th><th>Model</th><th>By</th><th>Licence</th></tr></thead><tbody>${rows.join('')}</tbody></table>`
+    + (coded.length ? `<p>${coded.join(' and ').replace(/^./, (m) => m.toUpperCase())} ${coded.length > 1 ? 'are' : 'is'} generated in code for this site. Some models show brand names; Soleora is not affiliated with those brands.</p>` : '');
 }
 
-function simplePage(file, title, description, current, body) {
-  return page({ headHtml: head({ title: `${title} | Soleora`, description, canonical: `/${file}` }), current, main: `<div class="wrap"><header class="page-head"><h1>${title}</h1></header><div class="prose-page">${body}</div></div>`, page: 'plain' });
+/** Titles keep compound words together (e.g. Flip-flops never breaks at the hyphen). */
+function displayTitle(t) { return esc(t).replace(/(\w)-(\w)/g, '$1\u2011$2'); }
+
+function simplePage(file, title, description, current, body, { noindex = false, wide = false } = {}) {
+  return page({ headHtml: head({ title: `${title} | Soleora`, description, canonical: `/${file}`, noindex }), current, main: `<div class="wrap"><header class="page-head"><h1>${title}</h1></header><div class="prose-page${wide ? ' wide' : ''}">${body}</div></div>`, page: 'plain' });
 }
 
 export function generate(out = OUT) {
@@ -298,13 +304,13 @@ export function generate(out = OUT) {
 <h2>Credits</h2>
 ${creditsHtml()}
 <h2>How we write</h2>
-<p>We avoid prices, brand endorsements and claims we can't support. Where history is uncertain, we say so. If you spot something wrong, tell us and we'll fix it.</p>`));
+<p>We avoid prices, brand endorsements and claims we can't support. Where history is uncertain, we say so. If you spot something wrong, tell us and we'll fix it.</p>`, { wide: true }));
   write('contact.html', simplePage('contact.html', 'Contact', 'Get in touch with Soleora.', 'contact',
     `<p>Found an error, or want to suggest a shoe we haven't covered yet? Send us an email and we'll reply within a few days.</p>
 <p><a class="btn" href="mailto:hello@example.com">Email hello@example.com</a></p>`));
   write('404.html', simplePage('404.html', "We couldn't find that page", 'Page not found.', '',
     `<p>The link may be old, or the address may have a typo. Try the showroom, or browse every shoe.</p>
-<p><a class="btn" href="/">Go to the showroom</a> <a class="btn btn--ghost" href="/articles.html">Browse all shoes</a></p>`));
+<p><a class="btn" href="/">Go to the showroom</a> <a class="btn btn--ghost" href="/articles.html">Browse all shoes</a></p>`, { noindex: true }));
   const urls = ['/', '/articles.html', '/about.html', '/contact.html', ...articles.map((a) => `/articles/${a.slug}.html`), ...Object.keys(CATEGORIES).map((k) => `/category/${k}.html`)];
   write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${url(u)}</loc></url>`).join('\n')}\n</urlset>\n`);
   write('public/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${url('/sitemap.xml')}\n`);

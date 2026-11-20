@@ -5,8 +5,10 @@
   --chalk: #EEF0EF;
   --studio: #D5D9DC;
   --ink: #1C2430;
-  --welt: #5A626A;
+  --welt: #50575F;
   --accent: #6E1F2A;
+  --on-accent: #FFFFFF;
+  --control: #8A9198;
   --gum: #C8955A;
   --gum-ring: #8A6233;
   --rule: #C9CED2;
@@ -35,8 +37,10 @@
   --chalk: #171B20;
   --studio: #20262D;
   --ink: #E8EBEC;
-  --welt: #9AA3AB;
-  --accent: #C9606E;
+  --welt: #A6AEB6;
+  --accent: #E0909A;
+  --on-accent: #171B20;
+  --control: #6A737C;
   --gum: #D9A86C;
   --gum-ring: #D9A86C;
   --rule: #2E363F;

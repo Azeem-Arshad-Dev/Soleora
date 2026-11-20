@@ -158,7 +158,7 @@
       0
     ],
     "credit": {
-      "title": "Mocasín Timeless Piel Becerro Negro",
+      "title": "Mocas\u00edn Timeless Piel Becerro Negro",
       "author": "vmmaniac",
       "license": "CC BY 4.0",
       "url": "https://sketchfab.com/3d-models/a2b08d13098e45638abae7e49b8c743c"
@@ -178,7 +178,23 @@
       "license": "CC BY 4.0",
       "url": "https://sketchfab.com/3d-models/4a0b039dfd8b4cee9da09dd893d5fae1"
     },
-    "anchors": {}
+    "anchors": {
+      "pullTab": [
+        -0.46,
+        0.95,
+        0.0
+      ],
+      "elastic": [
+        -0.12,
+        0.55,
+        0.14
+      ],
+      "heelBlock": [
+        -0.38,
+        0.06,
+        0.1
+      ]
+    }
   },
   "chukka-boots": {
     "file": "/models/chukka-boots.glb",

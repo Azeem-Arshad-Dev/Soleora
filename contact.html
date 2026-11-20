@@ -13,7 +13,8 @@
 <meta property="og:url" content="https://example.com/contact.html">
 <meta property="og:image" content="https://example.com/og/oxford-shoes.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#EEF0EF">
+<meta name="theme-color" content="#EEF0EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171B20" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/src/css/main.css">
@@ -32,7 +33,7 @@
         <li><a href="/about.html">About</a></li>
         <li><a href="/contact.html" aria-current="page">Contact</a></li>
       </ul>
-      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="theme-label">Dark</span></button>
+      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="theme-label">Dark</span></button>
     </nav>
   </div>
 </header>

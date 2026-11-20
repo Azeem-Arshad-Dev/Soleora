@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { frameObject } from './stage.js';
+import { reducedMotion } from '../capability.js';
 
 export const SPACING = 1.3;
 const D2R = Math.PI / 180;
@@ -74,10 +75,18 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
     const i = Math.round(state.pos);
     const narrow = stage.size.w < 720;
     const proxy = { position: new THREE.Vector3(state.pos * SPACING, 0, 0), userData: shoes[i]?.userData || {} };
-    return frameObject(stage, proxy, {
-      fill: narrow ? 0.62 : 0.3, baseAt: narrow ? 0.6 : 0.7, maxH: narrow ? 0.4 : 0.46,
+    const mid = !narrow && stage.size.w < 1180;
+    const pose = frameObject(stage, proxy, {
+      fill: narrow ? 0.62 : mid ? 0.24 : 0.3, baseAt: narrow ? 0.6 : 0.63, maxH: narrow ? 0.4 : mid ? 0.38 : 0.44,
       yaw: entries[i].view.yaw, pitch: entries[i].view.pitch, out: tmp,
     });
+    if (mid) {
+      // Nudge the shoe left so it clears the name and button block on the right.
+      const dist = pose.position.distanceTo(pose.target);
+      const visW = 2 * dist * Math.tan((stage.camera.fov * Math.PI) / 360) * stage.camera.aspect;
+      pose.position.x += visW * 0.07; pose.target.x += visW * 0.07;
+    }
+    return pose;
   }
   function applyCamera() {
     const p = cameraPose();
@@ -96,7 +105,7 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
     state.spin = 0;
     tween?.kill();
     if (instant) { state.pos = i; update(); } else {
-      tween = gsap.to(state, { pos: i, duration: 0.6, ease: 'power3.out', onUpdate: update });
+      tween = gsap.to(state, { pos: i, duration: reducedMotion() ? 0 : 0.6, ease: 'power3.out', onUpdate: update });
     }
     if (changed) listeners.forEach((f) => f(i));
   }

@@ -41,9 +41,12 @@ function cycloramaMaterial() {
   });
 }
 
+/** Stage colour for the current theme. Dark mode mixes in sRGB space (10% tint, 90% dark surface). */
 export function themeStageColor(hex) {
   const dark = document.documentElement.dataset.theme === 'dark';
-  return dark ? new THREE.Color(hex).lerp(new THREE.Color(DARK_STAGE), 0.86) : new THREE.Color(hex);
+  if (!dark) return new THREE.Color(hex);
+  const a = new THREE.Color(hex).convertLinearToSRGB(), b = new THREE.Color(DARK_STAGE).convertLinearToSRGB();
+  return a.lerp(b, 0.9).convertSRGBToLinear();
 }
 
 /**
@@ -72,7 +75,7 @@ export function createStage(el, { tier = 'full' } = {}) {
   const key = new THREE.DirectionalLight('#fff6ec', 2.2);
   key.position.set(-1.2, 4, 1.6);
   key.castShadow = true;
-  key.shadow.mapSize.set(2048, 2048);
+  key.shadow.mapSize.set(tier === 'light' ? 1024 : 2048, tier === 'light' ? 1024 : 2048);
   key.shadow.radius = 6;
   key.shadow.bias = -0.0004;
   key.shadow.normalBias = 0.01;
@@ -124,7 +127,8 @@ export function createStage(el, { tier = 'full' } = {}) {
      * procedural shoe once loaded (holder.userData.ready resolves either way).
      */
     addShoe(slug, quality = 'high') {
-      const { group, anchors } = getShoe(slug, quality);
+      // With a ready-made model, the procedural shoe is only a fallback and an anchor guide: build it cheaply.
+      const { group, anchors } = getShoe(slug, hasModel(slug) ? 'low' : quality);
       const holder = new THREE.Group();
       holder.name = slug;
       const proc = group.clone(true);
@@ -198,7 +202,6 @@ export function createStage(el, { tier = 'full' } = {}) {
     requestAnimationFrame(loop);
   })();
 
-  document.addEventListener('soleora:theme', () => { applyTint(themeStageColor(stage.baseTint || STUDIO)); dirty = true; });
   return stage;
 }
 

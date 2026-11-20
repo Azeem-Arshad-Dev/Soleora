@@ -13,7 +13,8 @@
 <meta property="og:url" content="https://example.com/">
 <meta property="og:image" content="https://example.com/og/chelsea-boots.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#EEF0EF">
+<meta name="theme-color" content="#EEF0EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171B20" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/src/css/main.css">
@@ -32,7 +33,7 @@
         <li><a href="/about.html">About</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
-      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span class="theme-label">Dark</span></button>
+      <button class="icon-btn theme-toggle" aria-label="Switch to dark mode"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="theme-label">Dark</span></button>
     </nav>
   </div>
 </header>
@@ -42,7 +43,7 @@
   <div class="wrap">
     <div class="showroom__intro">
       <h1>Pick one up. We'll tell you where it's been.</h1>
-      <p>Eighteen shoes, taken apart and explained. Drag the rail, then open the one in front.</p>
+      <p>Eighteen shoes, taken apart and explained. <span class="if-3d">Drag the rail, then open the one in front.</span><span class="if-stills">Pick any of them below.</span></p>
     </div>
     <div class="showroom__index fade-swap" aria-hidden="true"><span class="num tnum">13</span><span class="of">of 18</span></div>
     <div class="showroom__focus">
@@ -63,126 +64,126 @@
       <ul class="shoe-grid"><li data-cat="athletic" data-slug="running-shoes" data-text="running shoes: how to find your perfect pair running shoes cushioning, drop, fit and care: a clear guide to choosing running shoes that suit your stride. athletic running athletic performance">
   <a href="/articles/running-shoes.html" data-shoe="running-shoes">
     <figure>
-      <img src="/stills/running-shoes.webp" width="800" height="600" alt="Running shoes, shown on a athletic backdrop" style="--stage-tint:var(--tint-athletic)">
+      <img src="/stills/running-shoes.webp" width="800" height="600" alt="Running shoes, three-quarter view" style="--stage-tint:var(--tint-athletic)">
       <figcaption><span class="cat">Athletic</span><h3>Running shoes</h3><p>Cushioning, drop, fit and care: a clear guide to choosing running shoes that suit your stride.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="athletic" data-slug="basketball-shoes" data-text="basketball shoes: support, grip and style basketball shoes from canvas high-tops to modern court shoes: what makes a basketball shoe grip, support and last. athletic basketball athletic streetwear">
   <a href="/articles/basketball-shoes.html" data-shoe="basketball-shoes">
     <figure>
-      <img src="/stills/basketball-shoes.webp" width="800" height="600" alt="Basketball shoes, shown on a athletic backdrop" style="--stage-tint:var(--tint-athletic)">
+      <img src="/stills/basketball-shoes.webp" width="800" height="600" alt="Basketball shoes, three-quarter view" style="--stage-tint:var(--tint-athletic)">
       <figcaption><span class="cat">Athletic</span><h3>Basketball shoes</h3><p>From canvas high-tops to modern court shoes: what makes a basketball shoe grip, support and last.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="athletic" data-slug="football-boots" data-text="football boots and cleats explained football boots studs, surfaces, materials and fit: everything you need to choose football boots that suit your game. athletic football soccer athletic">
   <a href="/articles/football-boots.html" data-shoe="football-boots">
     <figure>
-      <img src="/stills/football-boots.webp" width="800" height="600" alt="Football boots, shown on a athletic backdrop" style="--stage-tint:var(--tint-athletic)">
+      <img src="/stills/football-boots.webp" width="800" height="600" alt="Football boots, three-quarter view" style="--stage-tint:var(--tint-athletic)">
       <figcaption><span class="cat">Athletic</span><h3>Football boots</h3><p>Studs, surfaces, materials and fit: everything you need to choose football boots that suit your game.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="athletic" data-slug="hiking-shoes-boots" data-text="hiking shoes vs hiking boots hiking shoes lugs, toe bumpers and fit: how to decide between hiking shoes and boots for your next trail. athletic hiking outdoor trail">
   <a href="/articles/hiking-shoes-boots.html" data-shoe="hiking-shoes-boots">
     <figure>
-      <img src="/stills/hiking-shoes-boots.webp" width="800" height="600" alt="Hiking shoes, shown on a athletic backdrop" loading="lazy" style="--stage-tint:var(--tint-athletic)">
+      <img src="/stills/hiking-shoes-boots.webp" width="800" height="600" alt="Hiking shoes, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-athletic)">
       <figcaption><span class="cat">Athletic</span><h3>Hiking shoes</h3><p>Lugs, toe bumpers and fit: how to decide between hiking shoes and boots for your next trail.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="casual" data-slug="sneakers" data-text="the sneaker: from court to culture sneakers vulcanized soles, canvas uppers and a rich history: the story and styling of the classic sneaker. casual sneakers casual streetwear">
   <a href="/articles/sneakers.html" data-shoe="sneakers">
     <figure>
-      <img src="/stills/sneakers.webp" width="800" height="600" alt="Sneakers, shown on a casual backdrop" loading="lazy" style="--stage-tint:var(--tint-casual)">
+      <img src="/stills/sneakers.webp" width="800" height="600" alt="Sneakers, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-casual)">
       <figcaption><span class="cat">Casual</span><h3>Sneakers</h3><p>Vulcanized soles, canvas uppers and a rich history: the story and styling of the classic sneaker.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="casual" data-slug="loafers" data-text="loafers: effortless smart-casual loafers penny straps, moccasin stitching and fit: how to choose, wear and care for a classic pair of loafers. casual loafers smart-casual leather">
   <a href="/articles/loafers.html" data-shoe="loafers">
     <figure>
-      <img src="/stills/loafers.webp" width="800" height="600" alt="Loafers, shown on a casual backdrop" loading="lazy" style="--stage-tint:var(--tint-casual)">
+      <img src="/stills/loafers.webp" width="800" height="600" alt="Loafers, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-casual)">
       <figcaption><span class="cat">Casual</span><h3>Loafers</h3><p>Penny straps, moccasin stitching and fit: how to choose, wear and care for a classic pair of loafers.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="casual" data-slug="slip-ons-espadrilles" data-text="slip-ons and espadrilles for easy summers espadrilles from pyrenean rope soles to laceless canvas sneakers, how to choose and wear summer's easiest shoes. casual espadrilles slip-ons summer">
   <a href="/articles/slip-ons-espadrilles.html" data-shoe="slip-ons-espadrilles">
     <figure>
-      <img src="/stills/slip-ons-espadrilles.webp" width="800" height="600" alt="Espadrilles, shown on a casual backdrop" loading="lazy" style="--stage-tint:var(--tint-casual)">
+      <img src="/stills/slip-ons-espadrilles.webp" width="800" height="600" alt="Espadrilles, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-casual)">
       <figcaption><span class="cat">Casual</span><h3>Espadrilles</h3><p>From Pyrenean rope soles to laceless canvas sneakers, how to choose and wear summer's easiest shoes.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="casual" data-slug="sandals" data-text="sandals and flip-flops: choosing well sandals what separates a sandal you can walk in all day from one that leaves your feet aching by lunch. casual sandals flip-flops summer">
   <a href="/articles/sandals.html" data-shoe="sandals">
     <figure>
-      <img src="/stills/sandals.webp" width="800" height="600" alt="Sandals, shown on a casual backdrop" loading="lazy" style="--stage-tint:var(--tint-casual)">
+      <img src="/stills/sandals.webp" width="800" height="600" alt="Sandals, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-casual)">
       <figcaption><span class="cat">Casual</span><h3>Sandals</h3><p>What separates a sandal you can walk in all day from one that leaves your feet aching by lunch.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="formal" data-slug="oxford-shoes" data-text="the oxford: the classic dress shoe oxfords why the closed-laced oxford remains the go-to dress shoe, and how to choose, fit, and care for one. formal oxfords dress shoes formal">
   <a href="/articles/oxford-shoes.html" data-shoe="oxford-shoes">
     <figure>
-      <img src="/stills/oxford-shoes.webp" width="800" height="600" alt="Oxfords, shown on a formal backdrop" loading="lazy" style="--stage-tint:var(--tint-formal)">
+      <img src="/stills/oxford-shoes.webp" width="800" height="600" alt="Oxfords, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-formal)">
       <figcaption><span class="cat">Formal</span><h3>Oxfords</h3><p>Why the closed-laced Oxford remains the go-to dress shoe, and how to choose, fit, and care for one.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="formal" data-slug="derby-shoes" data-text="derby shoes: versatile and comfortable derbies how open lacing makes the derby comfortable, adaptable, and smart enough for suits or jeans. formal derby shoes dress shoes smart casual">
   <a href="/articles/derby-shoes.html" data-shoe="derby-shoes">
     <figure>
-      <img src="/stills/derby-shoes.webp" width="800" height="600" alt="Derbies, shown on a formal backdrop" loading="lazy" style="--stage-tint:var(--tint-formal)">
+      <img src="/stills/derby-shoes.webp" width="800" height="600" alt="Derbies, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-formal)">
       <figcaption><span class="cat">Formal</span><h3>Derbies</h3><p>How open lacing makes the Derby comfortable, adaptable, and smart enough for suits or jeans.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="formal" data-slug="brogues" data-text="brogues: what the holes really mean brogues why brogues have holes, how to read the styles, and how to wear them from office to weekend. formal brogues wingtips dress shoes">
   <a href="/articles/brogues.html" data-shoe="brogues">
     <figure>
-      <img src="/stills/brogues.webp" width="800" height="600" alt="Brogues, shown on a formal backdrop" loading="lazy" style="--stage-tint:var(--tint-formal)">
+      <img src="/stills/brogues.webp" width="800" height="600" alt="Brogues, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-formal)">
       <figcaption><span class="cat">Formal</span><h3>Brogues</h3><p>Why brogues have holes, how to read the styles, and how to wear them from office to weekend.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="formal" data-slug="monk-straps" data-text="monk straps: buckles with character monk straps single or double buckle, suede or calf: how to choose, wear, and care for monk strap shoes. formal monk straps dress shoes buckles">
   <a href="/articles/monk-straps.html" data-shoe="monk-straps">
     <figure>
-      <img src="/stills/monk-straps.webp" width="800" height="600" alt="Monk straps, shown on a formal backdrop" loading="lazy" style="--stage-tint:var(--tint-formal)">
+      <img src="/stills/monk-straps.webp" width="800" height="600" alt="Monk straps, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-formal)">
       <figcaption><span class="cat">Formal</span><h3>Monk straps</h3><p>Single or double buckle, suede or calf: how to choose, wear, and care for monk strap shoes.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="boots" data-slug="chelsea-boots" data-text="chelsea boots: a wardrobe essential chelsea boots the laceless victorian boot that conquered 1960s london and still works with suits and jeans alike. boots boots classic leather">
   <a href="/articles/chelsea-boots.html" data-shoe="chelsea-boots">
     <figure>
-      <img src="/stills/chelsea-boots.webp" width="800" height="600" alt="Chelsea boots, shown on a boots backdrop" loading="lazy" style="--stage-tint:var(--tint-boots)">
+      <img src="/stills/chelsea-boots.webp" width="800" height="600" alt="Chelsea boots, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-boots)">
       <figcaption><span class="cat">Boots</span><h3>Chelsea boots</h3><p>The laceless Victorian boot that conquered 1960s London and still works with suits and jeans alike.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="boots" data-slug="chukka-boots" data-text="chukka and desert boots chukka boots from polo grounds and wartime bazaars to everyday style, the story of two-eyelet ankle boots. boots boots suede smart-casual">
   <a href="/articles/chukka-boots.html" data-shoe="chukka-boots">
     <figure>
-      <img src="/stills/chukka-boots.webp" width="800" height="600" alt="Chukka boots, shown on a boots backdrop" loading="lazy" style="--stage-tint:var(--tint-boots)">
+      <img src="/stills/chukka-boots.webp" width="800" height="600" alt="Chukka boots, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-boots)">
       <figcaption><span class="cat">Boots</span><h3>Chukka boots</h3><p>From polo grounds and wartime bazaars to everyday style, the story of two-eyelet ankle boots.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="boots" data-slug="work-boots" data-text="work boots: toughness explained work boots built for job sites, loved everywhere: the features and care behind a truly durable boot. boots boots rugged durable">
   <a href="/articles/work-boots.html" data-shoe="work-boots">
     <figure>
-      <img src="/stills/work-boots.webp" width="800" height="600" alt="Work boots, shown on a boots backdrop" loading="lazy" style="--stage-tint:var(--tint-boots)">
+      <img src="/stills/work-boots.webp" width="800" height="600" alt="Work boots, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-boots)">
       <figcaption><span class="cat">Boots</span><h3>Work boots</h3><p>Built for job sites, loved everywhere: the features and care behind a truly durable boot.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="womens" data-slug="heels" data-text="heels: a guide to heights and styles heels stilettos, blocks, and kitten heels explained, with tips on fit, comfort, and when to wear each. heels and flats heels formal womenswear">
   <a href="/articles/heels.html" data-shoe="heels">
     <figure>
-      <img src="/stills/heels.webp" width="800" height="600" alt="Heels, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/heels.webp" width="800" height="600" alt="Heels, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Heels</h3><p>Stilettos, blocks, and kitten heels explained, with tips on fit, comfort, and when to wear each.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="womens" data-slug="ballet-flats" data-text="ballet flats: comfort meets elegance ballet flats the dance-inspired flat that slips into a bag and works with jeans, skirts, and dresses. heels and flats flats comfort everyday">
   <a href="/articles/ballet-flats.html" data-shoe="ballet-flats">
     <figure>
-      <img src="/stills/ballet-flats.webp" width="800" height="600" alt="Ballet flats, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/ballet-flats.webp" width="800" height="600" alt="Ballet flats, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Ballet flats</h3><p>The dance-inspired flat that slips into a bag and works with jeans, skirts, and dresses.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="womens" data-slug="ankle-boots" data-text="ankle boots for every season ankle boots block heels, side zips, and smart styling tips for the most versatile boot you can own. heels and flats boots versatile seasonal">
   <a href="/articles/ankle-boots.html" data-shoe="ankle-boots">
     <figure>
-      <img src="/stills/ankle-boots.webp" width="800" height="600" alt="Ankle boots, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/ankle-boots.webp" width="800" height="600" alt="Ankle boots, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Ankle boots</h3><p>Block heels, side zips, and smart styling tips for the most versatile boot you can own.</p></figcaption>
     </figure>
   </a>
@@ -198,21 +199,21 @@
   <ul class="shoe-grid"><li data-cat="womens" data-slug="ankle-boots" data-text="ankle boots for every season ankle boots block heels, side zips, and smart styling tips for the most versatile boot you can own. heels and flats boots versatile seasonal">
   <a href="/articles/ankle-boots.html" data-shoe="ankle-boots">
     <figure>
-      <img src="/stills/ankle-boots.webp" width="800" height="600" alt="Ankle boots, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/ankle-boots.webp" width="800" height="600" alt="Ankle boots, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Ankle boots</h3><p>Block heels, side zips, and smart styling tips for the most versatile boot you can own.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="womens" data-slug="ballet-flats" data-text="ballet flats: comfort meets elegance ballet flats the dance-inspired flat that slips into a bag and works with jeans, skirts, and dresses. heels and flats flats comfort everyday">
   <a href="/articles/ballet-flats.html" data-shoe="ballet-flats">
     <figure>
-      <img src="/stills/ballet-flats.webp" width="800" height="600" alt="Ballet flats, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/ballet-flats.webp" width="800" height="600" alt="Ballet flats, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Ballet flats</h3><p>The dance-inspired flat that slips into a bag and works with jeans, skirts, and dresses.</p></figcaption>
     </figure>
   </a>
 </li><li data-cat="womens" data-slug="heels" data-text="heels: a guide to heights and styles heels stilettos, blocks, and kitten heels explained, with tips on fit, comfort, and when to wear each. heels and flats heels formal womenswear">
   <a href="/articles/heels.html" data-shoe="heels">
     <figure>
-      <img src="/stills/heels.webp" width="800" height="600" alt="Heels, shown on a heels and flats backdrop" loading="lazy" style="--stage-tint:var(--tint-womens)">
+      <img src="/stills/heels.webp" width="800" height="600" alt="Heels, three-quarter view" loading="lazy" style="--stage-tint:var(--tint-womens)">
       <figcaption><span class="cat">Heels and flats</span><h3>Heels</h3><p>Stilettos, blocks, and kitten heels explained, with tips on fit, comfort, and when to wear each.</p></figcaption>
     </figure>
   </a>

@@ -84,11 +84,39 @@ with sync_playwright() as p:
     check('next shoe swaps article', path(pg) == '/articles/monk-straps.html', path(pg))
     check('next shoe aligned', aligned(pg))
 
+    # Regression: two quick clicks on different shoes must end in one consistent article
+    pg.goto(BASE + '/'); ready(pg); time.sleep(1.5)
+    pg.evaluate("window.__soleora.debug.go('/articles/sneakers.html', {push:true}); setTimeout(() => window.__soleora.debug.go('/articles/loafers.html', {push:true}), 80);")
+    idle(pg); time.sleep(1.5); idle(pg); time.sleep(0.8)
+    slug = pg.evaluate("document.getElementById('main').dataset.slug")
+    check('double-nav ends consistent', path(pg) == f'/articles/{slug}.html' and pg.locator('.pin').count() == 3, f'{path(pg)} main={slug} pins={pg.locator(".pin").count()}')
+
+    # Regression: Back during an article-to-article swap keeps URL and content in sync
+    pg.goto(BASE + '/articles/chelsea-boots.html'); ready(pg); time.sleep(1)
+    pg.evaluate("window.__soleora.debug.go('/articles/chukka-boots.html', {push:true})")
+    time.sleep(0.25); pg.evaluate('history.back()')
+    time.sleep(0.3); idle(pg); time.sleep(1.5); idle(pg)
+    slug = pg.evaluate("document.getElementById('main').dataset.slug")
+    check('back mid-swap stays in sync', path(pg) == f'/articles/{slug}.html', f'{path(pg)} main={slug}')
+
+    # Regression: the skip link still works on article pages
+    pg.focus('.skip'); pg.keyboard.press('Enter'); time.sleep(0.3)
+    check('skip link moves focus to main', pg.evaluate("document.activeElement && document.activeElement.id") == 'main' and path(pg).startswith('/articles/'), pg.evaluate("document.activeElement.id + ' ' + location.hash"))
+
+    # Mid-width showroom and the stills fallback
+    pg.set_viewport_size({'width': 1024, 'height': 768}); pg.goto(BASE + '/'); ready(pg); time.sleep(2)
+    pg.screenshot(path=str(SHOTS / 'home-1024.png'))
+    pg.set_viewport_size({'width': 1440, 'height': 900})
+    pg.goto(BASE + '/?no3d'); ready(pg); time.sleep(0.5)
+    pg.screenshot(path=str(SHOTS / 'home-no3d.png'))
+
     # Mobile showroom
     m = b.new_page(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True)
     m.on('pageerror', lambda e: errors.append(str(e)))
     m.goto(BASE + '/'); ready(m); time.sleep(2.5)
     m.screenshot(path=str(SHOTS / 'home-mobile.png'))
+    m.goto(BASE + '/articles/brogues.html'); ready(m); time.sleep(2)
+    m.screenshot(path=str(SHOTS / 'article-mobile-brogues.png'))
 
     # Stills fallback and listing
     pg.goto(BASE + '/?no3d'); ready(pg); time.sleep(0.5)
@@ -106,6 +134,8 @@ with sync_playwright() as p:
     pg.emulate_media(color_scheme='dark')
     pg.goto(BASE + '/'); pg.evaluate("localStorage.removeItem('soleora-theme')"); pg.reload(); ready(pg); time.sleep(2.5)
     pg.screenshot(path=str(SHOTS / 'home-dark.png'))
+    pg.goto(BASE + '/articles/chelsea-boots.html'); ready(pg); time.sleep(2)
+    pg.screenshot(path=str(SHOTS / 'article-dark.png'))
 
     real = [e for e in errors if 'favicon' not in e]
     check('no console errors', not real, '; '.join(real[:5]))

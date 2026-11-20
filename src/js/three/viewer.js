@@ -2,13 +2,18 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { frameObject } from './stage.js';
+import { reducedMotion } from '../capability.js';
 
 const D2R = Math.PI / 180;
 const ZERO = new THREE.Vector3();
 
 export function heroPose(stage, shoe, entry) {
-  const narrow = stage.size.w < 600;
-  return frameObject(stage, shoe, { fill: narrow ? 0.72 : 0.7, baseAt: 0.82, yaw: entry.view.yaw, pitch: entry.view.pitch + 4, out: {} });
+  const { w, h } = stage.size;
+  const tall = h > w * 0.9; // phone panel
+  return frameObject(stage, shoe, {
+    fill: tall ? 0.74 : 0.66, baseAt: tall ? 0.68 : 0.74, maxH: tall ? 0.5 : 0.62,
+    yaw: entry.view.yaw, pitch: entry.view.pitch + 4, out: {},
+  });
 }
 
 /**
@@ -23,7 +28,9 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     b.className = 'pin is-hidden';
     b.type = 'button';
     b.innerHTML = `${h.n}<span class="tip">${h.label}</span>`;
-    b.setAttribute('aria-label', `${h.n}: ${h.label}`);
+    // Pins are a pointer shortcut; keyboard and screen-reader users get the same actions from the Key features list.
+    b.tabIndex = -1;
+    b.setAttribute('aria-hidden', 'true');
     b.dataset.n = h.n;
     pinsEl.appendChild(b);
     return { h, el: b, get local() { return shoe.userData.anchors?.[h.anchor] || ZERO; }, shown: false };
@@ -42,7 +49,8 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
   }
 
   // When a ready-made model replaces the placeholder, its height changes: re-frame once.
-  shoe.userData.ready?.then(() => { place(); stage.requestRender(); });
+  let alive = true;
+  shoe.userData.ready?.then(() => { if (!alive) return; place(); stage.requestRender(); });
 
   const offFrame = stage.onFrame(() => {
     shoe.rotation.y = state.yaw;
@@ -65,7 +73,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
       let facing = !hit || hit.distance > dist - 0.06;
       const nd = shoe.userData.dirs?.[p.h.anchor];
       if (!facing && nd) facing = nd.clone().transformDirection(shoe.matrixWorld).dot(toAnchor.negate()) > 0.15;
-      p.el.style.transform = `translate(${s.x}px, ${s.y}px)`;
+      p.el.style.translate = `${s.x}px ${s.y}px`;
       p.el.classList.toggle('is-hidden', !(pinsOn && facing && s.visible));
     }
   });
@@ -101,7 +109,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     });
   }
 
-  const turnTo = (yaw) => gsap.to(state, { yaw, duration: 0.7, ease: 'power3.inOut', onUpdate: () => stage.requestRender() });
+  const turnTo = (yaw) => gsap.to(state, { yaw, duration: reducedMotion() ? 0 : 0.7, ease: 'power3.inOut', onUpdate: () => stage.requestRender() });
 
   const onTools = (e) => {
     const b = e.target.closest('[data-rotate]');
@@ -120,7 +128,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
       d = Math.atan2(Math.sin(d), Math.cos(d));
       turnTo(state.yaw + d);
     }
-    if (scroll) mainEl.querySelector(`[data-hotspot="${n}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (scroll) mainEl.querySelector(`[data-hotspot="${n}"]`)?.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'center' });
   }
   const onPin = (e) => { const b = e.target.closest('.pin'); if (b) activate(Number(b.dataset.n), { scroll: true, turn: true }); };
   pinsEl.addEventListener('click', onPin);
@@ -129,6 +137,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
   mainEl.addEventListener('mouseover', onLiEnter);
   mainEl.addEventListener('focusin', onLiEnter);
   mainEl.addEventListener('mouseout', onLiLeave);
+  mainEl.addEventListener('focusout', onLiLeave);
 
   return {
     state,
@@ -140,6 +149,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     },
     hidePins() { pinsOn = false; stage.requestRender(); },
     dispose() {
+      alive = false;
       offFrame();
       pins.forEach((p) => p.el.remove());
       el.removeEventListener('pointerdown', down);
@@ -151,6 +161,7 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
       mainEl.removeEventListener('mouseover', onLiEnter);
       mainEl.removeEventListener('focusin', onLiEnter);
       mainEl.removeEventListener('mouseout', onLiLeave);
+      mainEl.removeEventListener('focusout', onLiLeave);
     },
   };
 }

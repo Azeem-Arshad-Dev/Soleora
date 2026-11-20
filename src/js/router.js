@@ -18,7 +18,7 @@ export function extractPage(html) {
 }
 
 /** Normalises a URL to a path key, or null if the router should not handle it. */
-export function routeOf(href, base = location.href) {
+export function routeOf(href, base = typeof location !== 'undefined' ? location.href : 'http://localhost/') {
   const u = new URL(href, base);
   if (u.origin !== new URL(base).origin) return null;
   const p = u.pathname.replace(/\/index\.html$/, '/');
@@ -56,6 +56,8 @@ export function swapIn(page) {
   document.title = page.title;
   document.querySelector('meta[name="description"]')?.setAttribute('content', page.description);
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', page.canonical);
+  const og = (k, v) => document.querySelector(`meta[property="og:${k}"]`)?.setAttribute('content', v);
+  og('title', page.title); og('description', page.description); og('url', page.canonical);
   document.querySelectorAll('.site-nav a').forEach((a) => {
     if (a.getAttribute('href') === page.current) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });

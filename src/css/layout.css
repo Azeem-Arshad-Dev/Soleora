@@ -21,7 +21,7 @@
 .icon-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   min-width: 40px; height: 40px; padding: 0 10px; border-radius: 20px;
-  background: transparent; border: 1px solid var(--rule); cursor: pointer;
+  background: transparent; border: 1px solid var(--control); cursor: pointer;
 }
 .icon-btn:hover { border-color: var(--ink); }
 .icon-btn svg { width: 18px; height: 18px; }
@@ -45,8 +45,8 @@
 .site-footer .legal { grid-column: 1 / -1; font-size: var(--s-14); padding-top: var(--gap-4); border-top: 1px solid var(--rule); }
 @media (max-width: 720px) { .site-footer .wrap { grid-template-columns: 1fr; } }
 
-.back-to-top { position: fixed; right: var(--gap-4); bottom: var(--gap-4); z-index: 25; opacity: 0; pointer-events: none; transition: opacity 0.3s; background: var(--chalk); }
-.back-to-top.is-visible { opacity: 1; pointer-events: auto; }
+.back-to-top { position: fixed; right: var(--gap-4); bottom: var(--gap-4); z-index: 25; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s, visibility 0.3s; background: var(--chalk); }
+.back-to-top.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
 /* Generic page header */
 .page-head { padding: var(--gap-7) 0 var(--gap-5); }
@@ -54,3 +54,14 @@
 .prose-page { max-width: 66ch; font-family: var(--serif); font-size: var(--s-19); line-height: 1.65; }
 .prose-page p + p { margin-top: 1em; }
 .prose-page h2 { font-family: var(--sans); margin: 1.6em 0 0.5em; }
+
+/* Theme toggle icon: moon in light mode, sun in dark mode */
+.theme-toggle .icon-sun { display: none; }
+[data-theme='dark'] .theme-toggle .icon-sun { display: block; }
+[data-theme='dark'] .theme-toggle .icon-moon { display: none; }
+
+/* About page credits */
+.credits-table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: var(--s-16); margin: 1em 0; }
+.credits-table th, .credits-table td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.credits-table th { color: var(--welt); font-weight: 500; }
+.prose-page.wide { max-width: 980px; }

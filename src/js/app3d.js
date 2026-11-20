@@ -35,8 +35,8 @@ function placeStage(r) {
   Object.assign(stageEl.style, { left: `${r.x}px`, top: `${r.y}px`, width: `${r.w}px`, height: `${r.h}px` });
   stage.resize();
 }
-function sync() {
-  if (busy) return;
+function sync(force = false) {
+  if (busy && !force) return;
   placeStage(slotRect());
   if (mode === 'showroom') rail.applyCamera();
   if (mode === 'article' && viewer) viewer.place();
@@ -46,10 +46,14 @@ function sync() {
 function setTint(hex) { tintHex = hex; stage.baseTint = hex; stage.setTint(hex); }
 function tweenTint(hex, duration, timeline, at = 0) {
   const from = stage.tint;
-  const to = themeStageColor(hex);
   const o = { k: 0 };
   tintHex = hex; stage.baseTint = hex;
-  timeline.to(o, { k: 1, duration, ease: 'power2.inOut', onUpdate: () => stage.setTintColor(from.clone().lerp(to, o.k)) }, at);
+  // The target is re-read every frame so a theme switch mid-transition lands on the right colour.
+  timeline.to(o, {
+    k: 1, duration, ease: 'power2.inOut',
+    onUpdate: () => stage.setTintColor(from.clone().lerp(themeStageColor(hex), o.k)),
+    onComplete: () => stage.setTint(hex),
+  }, at);
 }
 
 /* ---------- Showroom DOM bindings ---------- */
@@ -148,10 +152,17 @@ function bindCanvasInput() {
     clearTimeout(wheelT);
     wheelT = setTimeout(() => rail.settle(0), 140);
   }, { passive: false });
+  let hoverQueued = false, hx = 0, hy = 0;
   el.addEventListener('pointermove', (e) => {
     if (mode !== 'showroom' || d) return;
-    const g = stage.pick(e.offsetX, e.offsetY, rail.groups());
-    el.style.cursor = g ? 'pointer' : '';
+    hx = e.offsetX; hy = e.offsetY;
+    if (hoverQueued) return;
+    hoverQueued = true;
+    requestAnimationFrame(() => {
+      hoverQueued = false;
+      const g = stage.pick(hx, hy, rail.groups());
+      el.style.cursor = g ? 'pointer' : '';
+    });
   });
 }
 
@@ -198,7 +209,7 @@ function killFlight() { if (tl) { tl.progress(1); tl = null; } }
 
 async function flyToArticle(slug, path, { push }) {
   const page = await prefetch(path);
-  busy = true;
+  if (push) history.pushState({}, '', path);
   const reduce = reducedMotion();
   const i = indexOf(slug);
   const entry = articles[i];
@@ -216,14 +227,15 @@ async function flyToArticle(slug, path, { push }) {
   window.scrollTo(0, 0);
   const main = swapIn(page);
   main.classList.add('is-entering');
-  if (push) history.pushState({}, '', path);
-  current = routeOf(location.href);
+  main.querySelectorAll('.hero-still').forEach((img) => img.classList.add('is-covered'));
+  current = routeOf(path, location.href);
   const toRect = slotRect();
   placeStage(fromRect);
 
   const yawFrom = shoe.rotation.y, yawTo = entry.view.yaw * Math.PI / 180;
   const o = { p: 0 };
-  tl = gsap.timeline({ onComplete: done });
+  tl = gsap.timeline();
+  const flight = finished(tl);
   others.forEach((g) => {
     const dir = Math.sign(g.userData.index - i);
     tl.to(g.position, { x: g.position.x + dir * 2.4, duration: reduce ? 0.01 : 0.6, ease: 'power2.in' }, 0);
@@ -245,26 +257,26 @@ async function flyToArticle(slug, path, { push }) {
       stage.requestRender();
     },
   }, 0);
+  await flight;
+  done();
 
   function done() {
     tl = null;
     rail.setActive(false);
     others.forEach((g) => { g.scale.setScalar(1); });
-    busy = false;
     enterArticle(main, slug);
     main.classList.remove('is-entering');
     main.querySelectorAll('.article-title, .back-link').forEach((el) => el.classList.add('enter-up'));
     setTimeout(() => main.querySelectorAll('.article-body, .related').forEach((el) => el.classList.add('enter-up')), reduce ? 0 : 120);
     setTimeout(() => viewer?.showPins(), reduce ? 0 : 300);
-    const h1 = main.querySelector('h1');
-    if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
-    sync();
+    focusHeading(main);
+    sync(true);
   }
 }
 
 async function flyToShowroom(path, { push }) {
   const page = await prefetch(path);
-  busy = true;
+  if (push) history.pushState({}, '', path);
   const reduce = reducedMotion();
   const slug = current?.slug;
   const i = Math.max(0, indexOf(slug));
@@ -277,8 +289,7 @@ async function flyToShowroom(path, { push }) {
   const yawFrom = heroShoe.rotation.y;
   const main = swapIn(page);
   window.scrollTo(0, 0);
-  if (push) history.pushState({}, '', path);
-  current = routeOf(location.href);
+  current = routeOf(path, location.href);
   const sec = main.querySelector('.showroom');
   sec.classList.add('is-leaving');
   const toRect = slotRect();
@@ -298,7 +309,8 @@ async function flyToShowroom(path, { push }) {
   placeStage(fromRect);
 
   const o = { p: 0 };
-  tl = gsap.timeline({ onComplete: done });
+  tl = gsap.timeline();
+  const flight = finished(tl);
   targets.forEach(({ g, x, s }) => {
     tl.to(g.position, { x, duration: reduce ? 0.01 : 0.7, ease: 'power3.out' }, reduce ? 0 : 0.25);
     tl.to(g.scale, { x: s, y: s, z: s, duration: reduce ? 0.01 : 0.7, ease: 'power3.out' }, reduce ? 0 : 0.25);
@@ -316,36 +328,37 @@ async function flyToShowroom(path, { push }) {
       stage.requestRender();
     },
   }, 0);
+  await flight;
+  done();
 
   function done() {
     tl = null;
-    busy = false;
     heroShoe = null;
     enterShowroom(main);
     rail.update();
     sec.classList.remove('is-leaving');
-    sync();
+    sync(true);
     main.querySelector(`[data-rail="${articles[i].slug}"]`)?.focus({ preventScroll: true });
   }
 }
 
 async function swapArticle(slug, path, { push }) {
   const page = await prefetch(path);
-  busy = true;
+  if (push) history.pushState({}, '', path);
   const reduce = reducedMotion();
   const i = indexOf(slug);
   const entry = articles[i];
   viewer?.hidePins(); viewer?.dispose(); viewer = null;
   const old = heroShoe;
-  const t = gsap.timeline();
+  const t = tl = gsap.timeline();
   t.to(old.scale, { x: 0.01, y: 0.01, z: 0.01, duration: reduce ? 0.01 : 0.35, ease: 'power2.in' }, 0);
   t.to(old.rotation, { y: old.rotation.y - 1.2, duration: reduce ? 0.01 : 0.35, ease: 'power2.in' }, 0);
   await finished(t);
+  tl = null;
   returnShoe(old); old.scale.setScalar(1);
   window.scrollTo(0, 0);
   const main = swapIn(page);
-  if (push) history.pushState({}, '', path);
-  current = routeOf(location.href);
+  current = routeOf(path, location.href);
   placeStage(slotRect());
   heroShoe = takeShoe(i);
   heroShoe.position.set(i * SPACING, 0, 0);
@@ -354,35 +367,51 @@ async function swapArticle(slug, path, { push }) {
   heroShoe.rotation.y = yawTo + 1.2;
   const pose = heroPose(stage, heroShoe, entry);
   stage.camera.position.copy(pose.position); stage.camera.lookAt(pose.target);
-  const t2 = gsap.timeline();
+  const t2 = tl = gsap.timeline();
   tweenTint(TINTS[entry.category], reduce ? 0.2 : 0.5, t2, 0);
   t2.to(heroShoe.scale, { x: 1, y: 1, z: 1, duration: reduce ? 0.01 : 0.55, ease: 'power3.out', onUpdate: () => stage.requestRender() }, 0.05);
   t2.to(heroShoe.rotation, { y: yawTo, duration: reduce ? 0.01 : 0.55, ease: 'power3.out' }, 0.05);
   main.querySelectorAll('.article-title, .back-link, .article-body').forEach((el) => el.classList.add('enter-up'));
   await finished(t2);
-  busy = false;
+  tl = null;
   enterArticle(main, slug);
   viewer.showPins();
-  main.querySelector('h1')?.focus?.({ preventScroll: true });
-  sync();
+  focusHeading(main);
+  sync(true);
+}
+
+function focusHeading(main) {
+  const h1 = main.querySelector('h1');
+  if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
 }
 
 /* ---------- Router glue ---------- */
+// One navigation at a time. A request that arrives mid-flight finishes the current animation
+// instantly; afterwards the page is reconciled with whatever URL the browser now shows.
+let queued = null;
 async function go(href, { push }) {
   const r = routeOf(href);
   if (!r) { location.href = href; return; }
-  if (busy) { killFlight(); return; }
+  if (busy) { queued = { href, push }; killFlight(); return; }
+  busy = true;
   try {
     if (r.type === 'article' && mode === 'showroom') await flyToArticle(r.slug, r.path, { push });
     else if (r.type === 'article' && mode === 'article') {
-      if (r.slug === current?.slug) return;
-      await swapArticle(r.slug, r.path, { push });
+      if (r.slug !== current?.slug) await swapArticle(r.slug, r.path, { push });
     } else if (r.type === 'showroom' && mode === 'article') await flyToShowroom(r.path, { push });
-    else if (push) location.href = href;
+    else if (push && r.type !== mode) location.href = href;
   } catch (err) {
     console.warn('Route failed, loading normally', err);
     location.href = href;
+    return;
+  } finally {
+    busy = false;
   }
+  // Reconcile: a queued click wins; otherwise follow the address bar (Back/Forward during a flight).
+  const next = queued; queued = null;
+  if (next && next.push) return go(next.href, next);
+  const want = routeOf(location.href);
+  if (want && want.path !== current?.path) return go(location.href, { push: false });
 }
 
 function interceptLinks() {
@@ -390,6 +419,8 @@ function interceptLinks() {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest('a[href]');
     if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    const u = new URL(a.href, location.href);
+    if (u.hash && u.pathname === location.pathname) return; // skip links, in-page anchors
     const r = routeOf(a.href);
     if (!r) return;
     if (r.type === 'showroom' && mode === 'showroom') return;
@@ -399,7 +430,7 @@ function interceptLinks() {
   window.addEventListener('popstate', () => {
     const r = routeOf(location.href);
     if (!r) { location.reload(); return; }
-    if (busy) killFlight();
+    if (busy) { killFlight(); return; } // reconciled when the current flight ends
     go(location.href, { push: false });
   });
   document.addEventListener('keydown', (e) => {
