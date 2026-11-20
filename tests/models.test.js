@@ -11,7 +11,7 @@ describe('ready-made models', () => {
       expect(articles.some((a) => a.slug === slug)).toBe(true);
       const f = `public${m.file}`;
       expect(fs.existsSync(f)).toBe(true);
-      expect(fs.statSync(f).size).toBeLessThanOrEqual(700 * 1024);
+      expect(fs.statSync(f).size).toBeLessThanOrEqual(1536 * 1024);
       for (const k of ['title', 'author', 'license', 'url']) expect(m.credit[k], k).toBeTruthy();
       expect(m.credit.license).not.toMatch(/NC|NoDerivatives|ND/);
       expect(m.rotation).toHaveLength(3);

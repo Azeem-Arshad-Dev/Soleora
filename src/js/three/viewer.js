@@ -41,6 +41,9 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     stage.camera.lookAt(p.target);
   }
 
+  // When a ready-made model replaces the placeholder, its height changes: re-frame once.
+  shoe.userData.ready?.then(() => { place(); stage.requestRender(); });
+
   const offFrame = stage.onFrame(() => {
     shoe.rotation.y = state.yaw;
     shoe.updateMatrixWorld(true);
@@ -53,10 +56,15 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
       // Visible if nothing on the shoe sits between the camera and the anchor.
       const dir = world.clone().sub(stage.camera.position);
       const dist = dir.length();
-      ray.set(stage.camera.position, dir.normalize());
+      // Visible if nothing on the shoe blocks the line of sight, or (ready-made models, whose scans may
+      // have inverted normals) if the anchor's side of the shoe faces the camera.
+      const toAnchor = dir.clone().normalize();
+      ray.set(stage.camera.position, toAnchor);
       ray.far = dist;
       const hit = ray.intersectObject(shoe, true)[0];
-      const facing = !hit || hit.distance > dist - 0.03;
+      let facing = !hit || hit.distance > dist - 0.06;
+      const nd = shoe.userData.dirs?.[p.h.anchor];
+      if (!facing && nd) facing = nd.clone().transformDirection(shoe.matrixWorld).dot(toAnchor.negate()) > 0.15;
       p.el.style.transform = `translate(${s.x}px, ${s.y}px)`;
       p.el.classList.toggle('is-hidden', !(pinsOn && facing && s.visible));
     }

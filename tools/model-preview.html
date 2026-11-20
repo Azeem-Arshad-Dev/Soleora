@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Model preview</title>
+<style>html,body{margin:0;background:#222}canvas{display:block}</style></head>
+<body>
+<script type="module">
+// Four views of a raw model after rotation + keep + normalisation:
+// [3/4 hero] [side, toe should point right] / [top, toe right] [front, from the toe]
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { normalizeGroup } from '/src/js/shoes/build.js';
+const q = new URLSearchParams(location.search);
+const W = 1200, H = 800;
+const r = new THREE.WebGLRenderer({ antialias: true });
+r.setSize(W, H); r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.AgXToneMapping;
+r.setScissorTest(true);
+document.body.appendChild(r.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.add(new THREE.DirectionalLight('#fff', 1.5).translateY(3));
+const gltf = await new GLTFLoader().loadAsync(q.get('file'));
+const keep = q.get('keep') ? q.get('keep').split(',') : null;
+if (keep) gltf.scene.traverse((o) => { if (o.isMesh && !keep.some((k) => o.name.includes(k) || o.parent?.name.includes(k))) o.visible = false; });
+if (keep) { const rm = []; gltf.scene.traverse((o) => { if (o.isMesh && !o.visible) rm.push(o); }); rm.forEach((o) => o.parent.remove(o)); }
+const [rx, ry, rz] = (q.get('rot') || '0,0,0').split(',').map((v) => (+v * Math.PI) / 180);
+const g = new THREE.Group(), rot = new THREE.Group();
+rot.rotation.set(rx, ry, rz); rot.add(gltf.scene); g.add(rot);
+normalizeGroup(g);
+scene.add(g);
+scene.add(new THREE.AxesHelper(0.7));
+const views = [
+  [0, 0, new THREE.Vector3(0.9, 0.5, 1.4)],   // hero 3/4
+  [W / 2, 0, new THREE.Vector3(0, 0.15, 2)],  // side (+z)
+  [0, H / 2, new THREE.Vector3(0, 2, 0.001)], // top
+  [W / 2, H / 2, new THREE.Vector3(2, 0.15, 0)], // front from toe (+x)
+];
+const cam = new THREE.PerspectiveCamera(30, (W / 2) / (H / 2), 0.01, 50);
+for (const [x, y, pos] of views) {
+  r.setViewport(x, H / 2 - y, W / 2, H / 2); r.setScissor(x, H / 2 - y, W / 2, H / 2);
+  r.setClearColor(y === 0 ? (x === 0 ? '#c9ced2' : '#d8d2c8') : (x === 0 ? '#c8d3cf' : '#d6d1e0'));
+  cam.position.copy(pos); cam.lookAt(0, 0.12, 0); r.render(scene, cam);
+}
+window.__ready = true;
+</script></body></html>

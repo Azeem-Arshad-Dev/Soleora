@@ -57,9 +57,9 @@ Any shoe can use a downloaded `.glb` model instead of its code-built version. Mo
    node tools/import-model.mjs chelsea-boots models-source/chelsea.glb \
      --title="Model title" --author="Author name" --license="CC BY 4.0" --url="https://link-to-the-model"
    ```
-   This writes an optimised `public/models/<slug>.glb` (aim for 700 KB or less) and registers it in `src/data/models.json`.
+   This writes an optimised `public/models/<slug>.glb` (aim for 1.5 MB or less; use `--keep=` for files that contain a pair, `--rotate=x,y,z` to turn it, `--smooth` for flat-shaded scans) and registers it in `src/data/models.json`.
 3. Check the orientation: the toe must point +x and the sole sit on the floor. If not, set `rotation` (degrees, x/y/z) in `src/data/models.json`.
-4. Hotspots snap to the model automatically. To place one by hand, open the article with `?pick`, click the shoe, and copy the logged coordinates into the model's `anchors` in `src/data/models.json`.
+4. Hotspots snap to the model automatically. To steer one, open the article with `?pick`, click the shoe, and copy the logged coordinates into the model's `anchors` in `src/data/models.json` (they are snapped to the surface too).
 5. Re-render its stills (`python3 tools/render-stills.py <slug>` with `npx vite --port 5179` running) and run `npm test`. Credits appear on the About page automatically.
 
 ## Adding or changing a shoe

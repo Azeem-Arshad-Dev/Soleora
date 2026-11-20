@@ -368,10 +368,24 @@ export function buildShoe(slug, { quality = 'high' } = {}) {
   return { group, anchors };
 }
 
+/** Bounding box that ignores the outermost 0.3% of vertices on each axis (stray points in scanned models). */
+function robustBox(group) {
+  const xs = [], ys = [], zs = [];
+  const v = new THREE.Vector3();
+  group.traverse((o) => {
+    if (!o.isMesh) return;
+    const pos = o.geometry.getAttribute('position');
+    const step = Math.max(1, Math.floor(pos.count / 30000));
+    for (let i = 0; i < pos.count; i += step) { v.fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld); xs.push(v.x); ys.push(v.y); zs.push(v.z); }
+  });
+  const q = (a, f) => { a.sort((m, n) => m - n); return a[Math.min(a.length - 1, Math.max(0, Math.floor(f * (a.length - 1))))]; };
+  return new THREE.Box3(new THREE.Vector3(q(xs, 0.003), q(ys, 0.003), q(zs, 0.003)), new THREE.Vector3(q(xs, 0.997), q(ys, 0.997), q(zs, 0.997)));
+}
+
 /** Normalises any shoe group in place: length 1 along x, sole on y = 0, centred. Anchors are remapped. */
-export function normalizeGroup(group, anchors = {}) {
+export function normalizeGroup(group, anchors = {}, { robust = false } = {}) {
   group.updateMatrixWorld(true);
-  const box = new THREE.Box3().setFromObject(group);
+  const box = robust ? robustBox(group) : new THREE.Box3().setFromObject(group);
   const size = box.getSize(new THREE.Vector3());
   const s = 1 / size.x;
   const cx = (box.min.x + box.max.x) / 2, cz = (box.min.z + box.max.z) / 2;

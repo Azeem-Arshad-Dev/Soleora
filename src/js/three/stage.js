@@ -136,7 +136,7 @@ export function createStage(el, { tier = 'full' } = {}) {
         holder.userData.ready = loadModel(slug, anchors).then((m) => {
           holder.remove(proc);
           holder.add(m.group.clone(true));
-          Object.assign(holder.userData, { height: m.height, width: m.width, anchors: { ...m.anchors }, model: true });
+          Object.assign(holder.userData, { height: m.height, width: m.width, anchors: { ...m.anchors }, dirs: m.dirs, model: true });
           dirty = true;
         }).catch((err) => {
           console.warn(`Model for ${slug} failed, using the built-in shoe`, err);
@@ -203,13 +203,17 @@ export function createStage(el, { tier = 'full' } = {}) {
 }
 
 /** Places the camera so `obj` fills `fill` of the viewport width with its base at `baseAt` of the height. */
-export function frameObject(stage, obj, { fill = 0.42, baseAt = 0.62, yaw = -35, pitch = 12, out = {} } = {}) {
+export function frameObject(stage, obj, { fill = 0.42, baseAt = 0.62, yaw = -35, pitch = 12, maxH = 0.62, out = {} } = {}) {
   const cam = stage.camera;
   const len = 1; // shoes are normalised to length 1
   const projected = len * (Math.abs(Math.cos((yaw * Math.PI) / 180)) * 0.9 + 0.25);
   const vfov = (cam.fov * Math.PI) / 180;
   const visW = (d) => 2 * d * Math.tan(vfov / 2) * cam.aspect;
-  const d = projected / (fill * visW(1));
+  // Fit length to `fill` of the width, but never let a tall shoe (boots) exceed ~62% of the height.
+  const height = obj.userData?.height || 0.35;
+  const dW = projected / (fill * visW(1));
+  const dH = (height * 1.05) / (maxH * 2 * Math.tan(vfov / 2));
+  const d = Math.max(dW, dH);
   const pr = (pitch * Math.PI) / 180;
   // Vertical offset so the sole line (y = 0) sits at `baseAt` of the frame height (0 = top).
   const visH = 2 * d * Math.tan(vfov / 2);

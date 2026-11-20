@@ -310,7 +310,7 @@ async function flyToShowroom(path, { push }) {
       const e = o.p;
       placeStage({ x: lerp(fromRect.x, toRect.x, e), y: lerp(fromRect.y, toRect.y, e), w: lerp(fromRect.w, toRect.w, e), h: lerp(fromRect.h, toRect.h, e) });
       shoe.rotation.y = lerp(yawFrom, yawTo, e);
-      const pose = rail.cameraPose(stage.size.w < 720 ? 0.7 : 0.36, stage.size.w < 720 ? 0.6 : 0.64);
+      const pose = rail.cameraPose();
       stage.camera.position.lerpVectors(camFrom, pose.position, e);
       stage.camera.lookAt(new THREE.Vector3().lerpVectors(tgtFrom, pose.target, e));
       stage.requestRender();

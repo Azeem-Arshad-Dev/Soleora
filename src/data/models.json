@@ -13,5 +13,261 @@
       "url": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe"
     },
     "anchors": {}
+  },
+  "basketball-shoes": {
+    "file": "/models/basketball-shoes.glb",
+    "rotation": [
+      0,
+      90,
+      0
+    ],
+    "credit": {
+      "title": "Nike Dunks (Game Ready / 2K PBR)",
+      "author": "meerschaumdigital",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/d88162d9ac244b0d9a3aaceaefe475fd"
+    },
+    "anchors": {}
+  },
+  "football-boots": {
+    "file": "/models/football-boots.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Football boot made by Karhu",
+      "author": "urheilumuseo",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/c25630ab1a0143fbb831134eeeb51555"
+    },
+    "anchors": {}
+  },
+  "hiking-shoes-boots": {
+    "file": "/models/hiking-shoes-boots.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Old Lowa Gore-Tex Boot (2021 / FREE)",
+      "author": "inciprocal.com",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/417531d1bfcd4fc39f9cedbc1c85963e"
+    },
+    "anchors": {}
+  },
+  "sneakers": {
+    "file": "/models/sneakers.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Converse Classic",
+      "author": "turbopurr",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/0c6ee67086ed43ff8f531a5db991c8ee"
+    },
+    "anchors": {}
+  },
+  "loafers": {
+    "file": "/models/loafers.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Old Oxford Shoe",
+      "author": "inciprocal.com",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/29a5ed053eab46a7af308215600985a2"
+    },
+    "anchors": {}
+  },
+  "slip-ons-espadrilles": {
+    "file": "/models/slip-ons-espadrilles.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "keep": "Object_4,Object_6,Object_7,Object_9",
+    "credit": {
+      "title": "Narrow espadrilles 1.0",
+      "author": "zana1artm.io",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/664dcd98261641b88290a8841699c65b"
+    },
+    "anchors": {}
+  },
+  "sandals": {
+    "file": "/models/sandals.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Birkenstock Arizona sandal",
+      "author": "alban",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/eb8b6ec93ad4479c929d6d355b41680c"
+    },
+    "anchors": {}
+  },
+  "oxford-shoes": {
+    "file": "/models/oxford-shoes.glb",
+    "rotation": [
+      0,
+      125,
+      0
+    ],
+    "credit": {
+      "title": "Dress Shoe Left",
+      "author": "Sbell_Reality3D",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/32ba2d850eaa4ba0b73e5152825b8468"
+    },
+    "anchors": {}
+  },
+  "derby-shoes": {
+    "file": "/models/derby-shoes.glb",
+    "rotation": [
+      0,
+      150,
+      0
+    ],
+    "credit": {
+      "title": "Dress Shoe-Right",
+      "author": "Sbell_Reality3D",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/446631e469234ad3b4524d6467d67181"
+    },
+    "anchors": {}
+  },
+  "monk-straps": {
+    "file": "/models/monk-straps.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "Mocas\u00edn Timeless Piel Becerro Negro",
+      "author": "vmmaniac",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/a2b08d13098e45638abae7e49b8c743c"
+    },
+    "anchors": {}
+  },
+  "chelsea-boots": {
+    "file": "/models/chelsea-boots.glb",
+    "rotation": [
+      0,
+      180,
+      0
+    ],
+    "credit": {
+      "title": "Chelsea Boots Lowpoly",
+      "author": "MalahovaVladislava",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/4a0b039dfd8b4cee9da09dd893d5fae1"
+    },
+    "anchors": {}
+  },
+  "chukka-boots": {
+    "file": "/models/chukka-boots.glb",
+    "rotation": [
+      90,
+      0,
+      0
+    ],
+    "credit": {
+      "title": "boot brown model",
+      "author": "carlospastorarmada",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/59f4ed5a5bbb4ecdbae5890719bae214"
+    },
+    "anchors": {
+      "laces": [
+        0.12,
+        0.3,
+        0.06
+      ],
+      "shaft": [
+        -0.25,
+        0.28,
+        0.12
+      ]
+    }
+  },
+  "work-boots": {
+    "file": "/models/work-boots.glb",
+    "rotation": [
+      0,
+      180,
+      0
+    ],
+    "credit": {
+      "title": "Harrison Work Boot",
+      "author": "inciprocal.com",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/d9506d9a318e4c56ac3d8ab273bd2540"
+    },
+    "anchors": {
+      "toeCap": [
+        0.44,
+        0.13,
+        0.07
+      ],
+      "lugs": [
+        0.05,
+        0.0,
+        0.14
+      ]
+    }
+  },
+  "heels": {
+    "file": "/models/heels.glb",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "keep": "Object_4",
+    "credit": {
+      "title": "Classic high heel pumps",
+      "author": "Earl_1",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/e968fd35a2f1474996bc1536ae85970f"
+    },
+    "anchors": {},
+    "material": {
+      "color": "#1C2430",
+      "roughness": 0.18,
+      "clearcoat": 1,
+      "clearcoatRoughness": 0.06
+    }
+  },
+  "ankle-boots": {
+    "file": "/models/ankle-boots.glb",
+    "rotation": [
+      0,
+      -90,
+      0
+    ],
+    "keep": "clean_right",
+    "credit": {
+      "title": "Lace Up Ankle Boots (Retopologized)",
+      "author": "billionlioe",
+      "license": "CC BY 4.0",
+      "url": "https://sketchfab.com/3d-models/a1e79294805a475695ec08abb626f12f"
+    },
+    "anchors": {}
   }
 }

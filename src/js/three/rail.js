@@ -28,6 +28,7 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
     root.add(g);
     g.userData.index = i;
     shoes[i] = g;
+    g.userData.ready?.then(() => { if (state.active) update(); });
   }
   // Neighbours are built one per idle slot so the first frame is never blocked.
   const queue = new Set();
@@ -68,13 +69,18 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
   }
 
   const tmp = {};
-  function cameraPose(fill = 0.42, baseAt = 0.62) {
+  /** Rail framing: the focused shoe sits low and centred, leaving room for the headline and labels. */
+  function cameraPose() {
     const i = Math.round(state.pos);
+    const narrow = stage.size.w < 720;
     const proxy = { position: new THREE.Vector3(state.pos * SPACING, 0, 0), userData: shoes[i]?.userData || {} };
-    return frameObject(stage, proxy, { fill, baseAt, yaw: entries[i].view.yaw, pitch: entries[i].view.pitch, out: tmp });
+    return frameObject(stage, proxy, {
+      fill: narrow ? 0.62 : 0.3, baseAt: narrow ? 0.6 : 0.7, maxH: narrow ? 0.4 : 0.46,
+      yaw: entries[i].view.yaw, pitch: entries[i].view.pitch, out: tmp,
+    });
   }
   function applyCamera() {
-    const p = cameraPose(stage.size.w < 720 ? 0.66 : 0.36, stage.size.w < 720 ? 0.56 : 0.64);
+    const p = cameraPose();
     stage.followLight(p.target.x);
     stage.camera.position.copy(p.position);
     stage.camera.lookAt(p.target);
