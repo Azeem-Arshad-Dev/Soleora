@@ -323,8 +323,9 @@ export function buildShoe(slug, { quality = 'high' } = {}) {
     const bm = material('calf', spec.bow.color);
     for (const s of [-1, 1]) {
       const lobe = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 10), bm);
-      lobe.scale.set(0.012, 0.009, 0.026);
-      lobe.position.copy(p).add(new THREE.Vector3(0.004, 0.006, s * 0.024));
+      const big = spec.bow.big ? 1.5 : 1;
+      lobe.scale.set(0.014 * big, 0.007 * big, 0.026 * big);
+      lobe.position.copy(p).add(new THREE.Vector3(0.006, 0.006, s * 0.024 * big));
       lobe.rotation.x = s * 0.3;
       group.add(lobe);
     }

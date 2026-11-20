@@ -1,6 +1,6 @@
 # Credits
 
-3D models are used under their Creative Commons Attribution 4.0 licences (https://creativecommons.org/licenses/by/4.0/). Each was optimised for the web (textures resized to WebP, geometry simplified and quantised); some were rotated, trimmed to a single shoe, or given a new material. The same list is generated onto the About page from `src/data/models.json`.
+Downloaded 3D models are used under their Creative Commons Attribution 4.0 licences (https://creativecommons.org/licenses/by/4.0/). Each was optimised for the web (textures resized to WebP, geometry simplified and quantised); some were rotated, trimmed to a single shoe, or given a new material. The same list is generated onto the About page from `src/data/models.json`.
 
 - **Running shoes**: "Materials Variants Shoe" by Shopify, CC BY 4.0, https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe
 - **Basketball shoes**: "Nike Dunks (Game Ready / 2K PBR)" by meerschaumdigital, CC BY 4.0, https://sketchfab.com/3d-models/d88162d9ac244b0d9a3aaceaefe475fd
@@ -19,7 +19,7 @@
 - **Heels**: "Classic high heel pumps" by Earl_1, CC BY 4.0, https://sketchfab.com/3d-models/e968fd35a2f1474996bc1536ae85970f
 - **Ankle boots**: "Lace Up Ankle Boots (Retopologized)" by billionlioe, CC BY 4.0, https://sketchfab.com/3d-models/a1e79294805a475695ec08abb626f12f
 
-Brogues and ballet flats are generated in code (`src/js/shoes/`), as no suitable openly licensed models were found.
+Brogues: AI-generated for this site with Higgsfield (Tripo 3D text-to-3D), as no suitable openly licensed model was found. Ballet flats are generated in code (`src/js/shoes/`).
 
 Some models depict branded products (for example Nike, Converse and Birkenstock). Soleora is not affiliated with these brands; the models are shown for editorial illustration only.
 

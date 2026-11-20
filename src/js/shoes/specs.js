@@ -191,11 +191,16 @@ export const SHOE_SPECS = {
     anchors: { heelBlock: { heel: true }, toe: { t: 0.96, theta: 'top', side: 1 }, sole: { sole: 0.45 } },
   },
   'ballet-flats': {
-    last: L(LOW),
-    upper: { kind: 'calf', color: '#1F2328' },
-    sole: { layers: [{ kind: 'calf', color: '#14171B', frac: 1 }], lip: 0.006 },
-    bow: { color: '#1F2328' },
-    piping: { color: '#14171B' },
+    last: L(LOW, {
+      heelW: 0.105, waistW: 0.112, ballW: 0.16, toeW: 0.115, toeExp: 0.28, heelExp: 0.22,
+      roof: [[0, 0.22], [0.3, 0.22], [0.5, 0.2], [0.65, 0.165], [0.8, 0.13], [0.93, 0.1], [1, 0.07]],
+      topline: [[0, 0.13], [0.12, 0.105], [0.35, 0.085], [0.55, 0.095], [0.63, 0.13], [0.67, 0.25]],
+      heelHeight: 0.014, heelLen: 0.2, toeSpring: 0.018, soleThick: [[0, 0.018], [1, 0.014]], boxiness: 1.0, inset: 0.002,
+    }),
+    upper: { kind: 'polished', color: '#22262C' },
+    sole: { layers: [{ kind: 'calf', color: '#3A2A22', frac: 1 }], lip: 0.004 },
+    bow: { color: '#22262C', big: true },
+    piping: { color: '#16191D' },
     anchors: { bow: { bow: true }, collar: { t: 0.3, theta: 'top', side: 1 }, sole: { sole: 0.6 } },
   },
   'ankle-boots': {
