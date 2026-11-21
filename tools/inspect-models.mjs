@@ -1,8 +1,7 @@
 // Prints bounding box, vertex count and top-level parts for each .glb given.
-import { NodeIO } from '@gltf-transform/core';
-import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { getBounds } from '@gltf-transform/functions';
-const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
+import { webIO } from './lib/web-optimise.mjs';
+const io = await webIO(); // reads meshopt-compressed files too
 for (const f of process.argv.slice(2)) {
   try {
     const doc = await io.read(f);

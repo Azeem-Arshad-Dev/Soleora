@@ -3,18 +3,17 @@
 // Rotation (degrees) is applied at runtime so the toe points +x and the sole sits on y = 0.
 import fs from 'node:fs';
 import path from 'node:path';
-import { NodeIO } from '@gltf-transform/core';
-import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dedup, prune, weld, quantize, simplify, textureCompress, resample, flatten, join, metalRough, normals } from '@gltf-transform/functions';
 import { MeshoptSimplifier } from 'meshoptimizer';
 import sharp from 'sharp';
+import { webIO, webOptimise } from './lib/web-optimise.mjs';
 
 const [slug, input, ...rest] = process.argv.slice(2);
 if (!slug || !input) { console.error('Usage: node tools/import-model.mjs <slug> <input.glb> [--rotate=x,y,z] [--title=] [--author=] [--license=] [--url=]'); process.exit(1); }
 const opt = Object.fromEntries(rest.filter((a) => a.startsWith('--')).map((a) => { const [k, ...v] = a.slice(2).split('='); return [k, v.join('=')]; }));
 
 const MAX_VERTS = Number(opt.maxverts || 20000);
-const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
+const io = await webIO(); // also reads inputs that are already meshopt-compressed
 const doc = await io.read(input);
 const root = doc.getRoot();
 // --keep=a,b keeps only mesh nodes whose name contains one of the parts (for files that hold a pair).
@@ -38,6 +37,7 @@ if (verts > MAX_VERTS) steps.push(simplify({ simplifier: MeshoptSimplifier, rati
 if (opt.smooth !== undefined) steps.push(normals({ overwrite: true }));
 steps.push(textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [1024, 1024], quality: 82 }), quantize(), prune());
 await doc.transform(...steps);
+await webOptimise(doc); // 512 px aux maps + EXT_meshopt_compression
 
 const outRel = `/models/${slug}.glb`;
 const out = opt.out || path.join('public', outRel);
@@ -63,4 +63,4 @@ manifest[slug] = {
   anchors: prev.anchors || {},
 };
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-console.log(`${slug}: ${verts} vertices in, ${kb} KB out -> ${out}${kb > 1536 ? '  (over the 1.5 MB budget)' : ''}`);
+console.log(`${slug}: ${verts} vertices in, ${kb} KB out -> ${out}${kb > 768 ? '  (over the 768 KB budget)' : ''}`);

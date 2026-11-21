@@ -7,6 +7,7 @@
 // [3/4 hero] [side, toe should point right] / [top, toe right] [front, from the toe]
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { normalizeGroup } from '/src/js/shoes/build.js';
 const q = new URLSearchParams(location.search);
@@ -18,7 +19,7 @@ document.body.appendChild(r.domElement);
 const scene = new THREE.Scene();
 scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
 scene.add(new THREE.DirectionalLight('#fff', 1.5).translateY(3));
-const gltf = await new GLTFLoader().loadAsync(q.get('file'));
+const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(q.get('file'));
 const keep = q.get('keep') ? q.get('keep').split(',') : null;
 if (keep) gltf.scene.traverse((o) => { if (o.isMesh && !keep.some((k) => o.name.includes(k) || o.parent?.name.includes(k))) o.visible = false; });
 if (keep) { const rm = []; gltf.scene.traverse((o) => { if (o.isMesh && !o.visible) rm.push(o); }); rm.forEach((o) => o.parent.remove(o)); }

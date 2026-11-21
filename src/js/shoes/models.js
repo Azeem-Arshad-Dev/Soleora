@@ -1,6 +1,7 @@
 // Ready-made .glb shoe models (see src/data/models.json and tools/import-model.mjs).
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import MODELS from '../../data/models.json';
 import { normalizeGroup } from './build.js';
 
@@ -50,7 +51,7 @@ export function loadModel(slug, fallbackAnchors = {}) {
   const info = MODELS[slug];
   if (!info) return Promise.reject(new Error(`No model for ${slug}`));
   if (!cache.has(slug)) {
-    loader ||= new GLTFLoader();
+    loader ||= new GLTFLoader().setMeshoptDecoder(MeshoptDecoder); // models use EXT_meshopt_compression
     cache.set(slug, loader.loadAsync(info.file).then((gltf) => {
       const group = new THREE.Group();
       const rot = new THREE.Group();
