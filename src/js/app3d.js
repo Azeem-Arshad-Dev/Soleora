@@ -451,7 +451,9 @@ export function start(opts) {
   current = routeOf(location.href);
   const main = document.getElementById('main');
   const startSlug = current?.type === 'article' ? current.slug : 'chelsea-boots';
-  rail = createRail(stage, articles, { startIndex: Math.max(0, indexOf(startSlug)), quality: tier === 'light' ? 'low' : 'high' });
+  const onArticle = current?.type === 'article';
+  // On an article page the rail starts hidden: only the hero loads up front (see the preload below).
+  rail = createRail(stage, articles, { startIndex: Math.max(0, indexOf(startSlug)), quality: tier === 'light' ? 'low' : 'high', active: !onArticle });
   bindCanvasInput();
   interceptLinks();
   history.scrollRestoration = 'manual';
@@ -479,6 +481,8 @@ export function start(opts) {
   const first = current?.type === 'article' ? heroShoe : rail.focusedGroup();
   Promise.race([first?.userData.ready || Promise.resolve(), new Promise((r) => setTimeout(r, 6000))]).then(() => requestAnimationFrame(() => {
     stage.renderNow();
+    // The neighbours on either side are what the Back transition flies in; load them once the hero is up.
+    if (onArticle) rail.preload(1);
     stageEl.classList.add('is-ready');
     document.querySelectorAll('.hero-still').forEach((img) => img.classList.add('is-covered'));
     window.__soleora.ready = true;

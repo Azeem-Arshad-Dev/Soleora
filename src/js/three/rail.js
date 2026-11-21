@@ -15,11 +15,12 @@ export function railScale(d) {
   return Math.max(0.3, 0.38 - 0.08 * (a - 2));
 }
 
-export function createRail(stage, entries, { startIndex = 0, quality = 'high' } = {}) {
+export function createRail(stage, entries, { startIndex = 0, quality = 'high', active = true } = {}) {
   const shoes = new Array(entries.length).fill(null);
-  const state = { pos: startIndex, focus: startIndex, active: true, spin: 0, drop: 0 };
+  const state = { pos: startIndex, focus: startIndex, active, spin: 0, drop: 0 };
   const listeners = new Set();
   const root = new THREE.Group();
+  root.visible = active;
   stage.scene.add(root);
 
   function ensure(i) {
@@ -31,23 +32,33 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
     shoes[i] = g;
     g.userData.ready?.then(() => { if (state.active) update(); });
   }
-  // Neighbours are built one per idle slot so the first frame is never blocked.
+  // Neighbours are built one per idle slot so the first frame is never blocked. Their models load one
+  // at a time, nearest first, and only after the shoe in front has loaded, so it gets the bandwidth.
   const queue = new Set();
   let pumping = false;
   const idle = window.requestIdleCallback || ((f) => setTimeout(f, 16));
+  const centreReady = () => shoes[Math.max(0, Math.min(entries.length - 1, Math.round(state.pos)))]?.userData.ready;
   function pump() {
     pumping = true;
-    idle(() => {
+    Promise.resolve(centreReady()).then(() => idle(() => {
       const next = [...queue].sort((a, b) => Math.abs(a - state.pos) - Math.abs(b - state.pos))[0];
-      if (next !== undefined) { queue.delete(next); ensure(next); layout(); stage.requestRender(); }
-      if (queue.size) pump(); else pumping = false;
-    });
+      let ready;
+      if (next !== undefined) {
+        queue.delete(next);
+        if (!shoes[next]) { ensure(next); layout(); stage.requestRender(); }
+        ready = shoes[next]?.userData.ready;
+      }
+      Promise.resolve(ready).then(() => { if (queue.size) pump(); else pumping = false; });
+    }));
   }
-  function ensureNear(r = 2) {
+  function queueNear(r) {
     const c = Math.round(state.pos);
-    ensure(Math.max(0, Math.min(entries.length - 1, c)));
     for (let k = -r; k <= r; k++) { const i = c + k; if (i >= 0 && i < entries.length && !shoes[i]) queue.add(i); }
     if (queue.size && !pumping) pump();
+  }
+  function ensureNear(r = 2) {
+    ensure(Math.max(0, Math.min(entries.length - 1, Math.round(state.pos))));
+    queueNear(r);
   }
 
   /** Lays every shoe out from the continuous rail position. */
@@ -119,6 +130,8 @@ export function createRail(stage, entries, { startIndex = 0, quality = 'high' } 
     entries, shoes, state,
     focusedGroup() { return shoes[state.focus]; },
     ensure,
+    /** Queues the shoes within `r` places of the rail position for background loading. */
+    preload: queueNear,
     groups() { return shoes.filter(Boolean).filter((g) => g.visible); },
     goTo,
     step(d) { goTo(state.focus + d); },

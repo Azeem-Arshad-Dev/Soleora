@@ -96,13 +96,16 @@ function footer() {
 <script type="module" src="/src/js/main.js"></script>`;
 }
 
-function page({ headHtml, current, main, page, slug = '', tint = '' }) {
+// URL of the model the 3D stage shows first on this page; main.js preloads it when 3D is on.
+const modelOf = (slug) => models[slug]?.file || '';
+
+function page({ headHtml, current, main, page, slug = '', tint = '', model = '' }) {
   return `<!doctype html>
 <html lang="en">
 <head>
 ${headHtml}
 </head>
-<body data-page="${page}"${slug ? ` data-slug="${slug}"` : ''}${tint ? ` style="--stage-tint:${tint}"` : ''}>
+<body data-page="${page}"${slug ? ` data-slug="${slug}"` : ''}${model ? ` data-model="${model}"` : ''}${tint ? ` style="--stage-tint:${tint}"` : ''}>
 ${header(current)}
 <main id="main" tabindex="-1" data-page="${page}"${slug ? ` data-slug="${slug}"` : ''}${tint ? ` style="--stage-tint:${tint}"` : ''}>
 ${main}
@@ -203,7 +206,7 @@ function articlePage(a, i) {
 </div>`;
   return page({
     headHtml: head({ title: `${a.title} | Soleora`, description: a.standfirst, canonical: p, image: `/og/${a.slug}.webp`, type: 'article', jsonld }),
-    current: 'articles', main, page: 'article', slug: a.slug, tint: tintVar(a.category),
+    current: 'articles', main, page: 'article', slug: a.slug, tint: tintVar(a.category), model: modelOf(a.slug),
   });
 }
 
@@ -246,7 +249,7 @@ function homePage() {
 </section>`;
   return page({
     headHtml: head({ title: 'Soleora: a showroom of eighteen shoes, explained', description: 'Pick up any of eighteen 3D shoes and read where it came from, how it is made and how to wear it.', canonical: '/', image: `/og/${featured.slug}.webp`, jsonld: [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Soleora', url: url('/') }] }),
-    current: 'home', main, page: 'showroom',
+    current: 'home', main, page: 'showroom', model: modelOf(featured.slug),
   });
 }
 

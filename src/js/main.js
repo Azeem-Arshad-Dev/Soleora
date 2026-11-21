@@ -40,7 +40,14 @@ window.__soleora = { ready: false, tier };
 
 if ((page === 'showroom' || page === 'article') && tier !== 'stills') {
   document.documentElement.classList.add('has-3d');
-  import('./app3d.js').then((m) => m.start({ tier })).catch((err) => {
+  import('./app3d.js').then((m) => {
+    // Start the first shoe's model download before the stage's synchronous setup (renderer, lighting),
+    // so the two overlap; GLTFLoader's fetch picks up this preload. Done here rather than at page load
+    // so it does not compete with the 3D code itself for bandwidth.
+    const model = document.body.dataset.model;
+    if (model) document.head.appendChild(Object.assign(document.createElement('link'), { rel: 'preload', as: 'fetch', href: model, crossOrigin: 'anonymous' }));
+    m.start({ tier });
+  }).catch((err) => {
     console.warn('3D unavailable, showing stills', err);
     document.documentElement.classList.remove('has-3d');
     window.__soleora.ready = true;

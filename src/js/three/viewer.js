@@ -57,6 +57,8 @@ export function mountViewer(stage, shoe, entry, mainEl, { animatePins = true } =
     shoe.updateMatrixWorld(true);
     center.set(0, (shoe.userData.height || 0.3) * 0.45, 0);
     shoe.localToWorld(center);
+    // Hidden pins need no placement or occlusion raycasts (showPins() requests a fresh frame).
+    if (!pinsOn) { for (const p of pins) p.el.classList.add('is-hidden'); return; }
     for (const p of pins) {
       world.copy(p.local);
       shoe.localToWorld(world);
