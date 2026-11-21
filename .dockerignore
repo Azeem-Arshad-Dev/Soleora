@@ -1,0 +1,6 @@
+node_modules
+dist
+models-source
+tests/e2e/shots
+.git
+.DS_Store

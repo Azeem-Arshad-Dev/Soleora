@@ -84,3 +84,11 @@ The end-to-end test saves screenshots to `tests/e2e/shots/`.
 
 - Replace `https://example.com` in `scripts/generate-pages.mjs` (the `SITE` constant) with your domain, and `hello@example.com` on the contact page.
 - The 3D code uses no WebAssembly (models are quantised, not Draco or Meshopt compressed), so a Content-Security-Policy of `script-src 'self'` is enough.
+
+## Run with Docker
+
+```bash
+docker compose up -d --build
+```
+
+The site is then served by nginx at http://localhost:8080 (or http://<your-LAN-IP>:8080 from other devices on the same network). Stop it with `docker compose down`.

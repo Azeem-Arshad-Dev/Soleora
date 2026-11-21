@@ -1,0 +1,8 @@
+services:
+  soleora:
+    build: .
+    image: soleora:latest
+    container_name: soleora
+    ports:
+      - "8080:80"
+    restart: unless-stopped
