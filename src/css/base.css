@@ -1,5 +1,5 @@
-@import '@fontsource-variable/bricolage-grotesque/standard.css';
-@import '@fontsource-variable/source-serif-4/opsz.css';
+/* Self-hosted Latin subsets of the @fontsource-variable faces (see tools/subset-fonts.py). */
+@import './fonts.css';
 
 :root {
   --chalk: #EEF0EF;
