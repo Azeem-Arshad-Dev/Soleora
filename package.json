@@ -9,7 +9,7 @@
   "scripts": {
     "generate": "node scripts/generate-pages.mjs",
     "dev": "npm run generate && vite",
-    "build": "npm run generate && vite build",
+    "build": "npm run generate && vite build && node scripts/precompress.mjs",
     "preview": "vite preview --port 4173",
     "test": "vitest run"
   },
